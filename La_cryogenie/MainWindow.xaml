@@ -1,0 +1,78 @@
+﻿<Window 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="La_cryogenie.MainWindow"
+        
+        Title="La_cryogenie" Icon="snowflake_iphone.ico" d:DesignWidth="625" d:DesignHeight="262" SizeToContent="WidthAndHeight">
+    <TabControl>
+        <TabItem Header="Controls">
+            <StackPanel>
+                <Button x:Name="button_StartBot" Content="Start" Click="button_StartBot_Click" Margin="2"/>
+
+                <ListView x:Name="listView_Chats">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Friendly Chatname" DisplayMemberBinding="{Binding friendlyChatName}"/>
+                            <GridViewColumn Header="DB Chatname" DisplayMemberBinding="{Binding dBChatname}"/>
+                            <GridViewColumn Header="Count of members" DisplayMemberBinding="{Binding CountOfMembers}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Button x:Name="button_acceptSelectedChats" Content="Accept Selected Chats" Click="button_acceptSelectedChats_Click" Margin="2"/>
+            </StackPanel>
+        </TabItem>
+        <TabItem Header="Log">
+            <RichTextBox x:Name="richTextBox_MessageLog" MinHeight="20" MaxWidth="400" MaxHeight="500" VerticalScrollBarVisibility="Auto" Margin="5"/>
+        </TabItem>
+        <TabItem Header="Status">
+            <StackPanel>
+                <WrapPanel>
+                    <Label Content="Attached to skype?"/>
+                    <Label x:Name="label_IsAttachedToSkype" Content=""/>
+                </WrapPanel>
+
+
+            </StackPanel>
+        </TabItem>
+        <TabItem Header="No Owner">
+            <StackPanel>
+                <WrapPanel>
+                    <Label Content="NoOwner Check Started?"/>
+                    <Label x:Name="label_IsNoOwnerStarted" Content=""/>
+                </WrapPanel>
+                <WrapPanel>
+                    <Label Content="NoOwner Checks count:"/>
+                    <Label x:Name="label_NoOwnerChecksCount" Content=""/>
+                </WrapPanel>
+                <StackPanel>
+                    <Button x:Name="button_NoOwnerStart" Content="NoOwner Start" Click="button_NoOwnerStart_Click" Margin="2"/>
+                    <Button x:Name="button_NoOwnerStop" Content="NoOwner Stop" Click="button_NoOwnerStop_Click" Margin="2" />
+                </StackPanel>
+            </StackPanel>
+        </TabItem>
+        <TabItem Header="Notices">
+            <StackPanel>
+                <Button x:Name="button_StartCheckingNotices" Content="Start Checking Notices" Click="button_StartCheckingNotices_Click"/>
+                <WrapPanel>
+                    <Label Content="Notices checker count:"/>
+                    <Label x:Name="label_NoticesCheckerCount" Content=""/>
+                </WrapPanel>
+                
+            </StackPanel>
+        </TabItem>
+        <TabItem Header="BadChatParser">
+            <StackPanel>
+                <WrapPanel>
+                <Label Content="Login"/>
+                    <TextBox x:Name="textbox_PwGmtoolPvtLogin" Text="Operator29"/>
+                </WrapPanel>
+                <WrapPanel>
+                    <Label Content="Password"/>
+                    <PasswordBox x:Name="passwordBox_PwGmtoolPvtPassword" Password="44c5EgnT#t`!KECvb^F2Tht"/>
+                </WrapPanel>
+                <Button x:Name="button_LoginToPwGmToolPvt" Content="Login to pw.gmtool.pvt" Click="button_LoginToPwGmToolPvt_Click"/>
+                <Button x:Name="button_StartBadChatChecking" Content="StartParsing" Click="button_StartBadChatChecking_Click"/>
+            </StackPanel>
+        </TabItem>
+    </TabControl>
+</Window>
