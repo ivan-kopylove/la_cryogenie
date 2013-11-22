@@ -190,6 +190,7 @@ namespace La_cryogenie
         List<int> receivedMessagesIds = new List<int>();
         private void skype_MessageReceived(ChatMessage msg, TChatMessageStatus status)
         {
+            
             //отбрасываем ненужные нам события
             if (status == TChatMessageStatus.cmsSending | status == TChatMessageStatus.cmsRead | status == TChatMessageStatus.cmsUnknown)
             {
@@ -211,7 +212,7 @@ namespace La_cryogenie
                 return;
             }
             receivedMessagesIds.Add(msg.Id);
-
+            
 
             if (status == TChatMessageStatus.cmsSent)
             {
@@ -265,29 +266,19 @@ namespace La_cryogenie
 
         private void processCommand(ChatMessage msg)
         {
+            
             string command = msg.Body.Remove(0, chatCommandTrigger.Length);
+
+            //~~~~~~args by space~~~~~~~
             string[] commandArguments = command.Split(' ');
             commandArguments[0] = commandArguments[0].ToLower();
+            //~~~~~~args by space~~~~~~~
 
-            if (msg.ChatName == testChat1)
-            {
-                switch (commandArguments[0])
-                {
-                    case "ф":
-                    case "ph":
-                    case "фишинг":
-                    case "phishing":
-                        if (commandArguments.Length < 3)
-                        {
-                            SkypeStatic.sendMessage(msg.ChatName, string.Format("{0}, ты ошибся в написании команды. Правильно так: \"!{1} ССЫЛКА ПРОЕКТ\" {2}", msg.Sender.FullName, commandArguments[0], SkypeStatic.getRandomSmile()));
-                            break;
-                        }
-                        BadLink phishing = new BadLink(msg, commandArguments);
-                        phishing.processPhishinLink();
-                        break;
-
-                }
-            }
+            //~~~~~~args by new line~~~~~~~
+            string[] commandArgumentsLineByLine = command.Split('\n');
+            commandArgumentsLineByLine[0] = commandArgumentsLineByLine[0].ToLower();
+            //~~~~~~args by new line~~~~~~~
+            
 
             #region notices settings chat
             if (msg.ChatName == noticesSettingsChat)
@@ -437,6 +428,18 @@ namespace La_cryogenie
                 }
             }
             #endregion
+
+            #region failchat
+            if (msg.ChatName == testChat1)
+            {
+                if (commandArgumentsLineByLine[0].Contains("operator.mail.ru/support/staff/index.php?/Tickets/Ticket/View/".ToLower()))
+                {
+                    SkypeStatic.sendMessage(msg.ChatName, "DAS");
+                    Fail fail = new Fail(msg, commandArgumentsLineByLine);
+                    fail.proccessNewFail();
+                }
+            }
+            #endregion
         }
 
         private void addTextToRichChatLog(ChatMessage msg)
@@ -539,97 +542,13 @@ namespace La_cryogenie
         }
         #endregion
 
-        #region badchat
-
-        DispatcherTimer badChatCheckTimer = new DispatcherTimer();
-
-        private void button_LoginToPwGmToolPvt_Click(object sender, RoutedEventArgs e)
-        {
-            if (pw_gmtool_pvt.auth(textbox_PwGmtoolPvtLogin.Text, passwordBox_PwGmtoolPvtPassword.Password))
-            {
-                button_LoginToPwGmToolPvt.IsEnabled = false;
-                return;
-            }
-        }
-
-        private void button_StartBadChatChecking_Click(object sender, RoutedEventArgs e)
-        {
-            button_StartBadChatChecking.IsEnabled = false;
-            badChatCheckTimer.Interval = new TimeSpan(0, 0, 15);
-            badChatCheckTimer.Tick += BadChatCheck_Tick;
-            badChatCheckTimer.Start();
-        }
-
-        private void BadChatCheck_Tick(object sender, EventArgs e)
-        {
-            string html = null;
-            try
-            {
-                html = pw_gmtool_pvt.navigate("http://pw.gmtool.pvt/logs/badchat");
-            }
-            catch (Exception ex)
-            {
-                App.log.Trace("Ошибка pw_gmtool_pvt.navigate() {0}, {1}", ex.Message, ex.TargetSite.ToString());
-                 return;
-            }
-
-            if (html == null)
-            {
-                return;
-            }
-            List<BadChatFields> badchat = pw_gmtool_pvt.getBadChat(html);
-            if (badchat.Count < 1)
-            {
-                return;
-            }
-            foreach (var column in badchat)
-            {
-                string phrase = column.Phrase.ToLower().Replace("common : ", "");
-                string charId = column.UserID;
-                DataTable checkedChars = Sqlite.executeSearch(string.Format("SELECT * FROM [badchat-checked-chars] WHERE charid = '{0}'", charId));
-                if (checkedChars.Rows.Count != 0)
-                {
-                    return;
-                }
-                else
-                {
-                    Sqlite.executeVoid(String.Format("INSERT INTO [badchat-checked-chars] ('charid') VALUES ('{0}')", charId));
-
-                    phrase = Utilities.StripHTML(phrase);
-                    MatchCollection hosts = NetTools.getHostsFromString(phrase);
-
-                    if (hosts != null)
-                    {
-                        for (int i = 0; i < hosts.Count; i++)
-                        {
-
-                            DataTable result = Sqlite.executeSearch(string.Format("SELECT * FROM [badchat-links] WHERE host = '{0}'", hosts[i]));
-                            if (result.Rows.Count == 0)
-                            {
-                                Sqlite.executeVoid(String.Format("INSERT INTO [badchat-links] ('host','phrase','isbad') VALUES ('{0}','{1}','{2}')",
-                                                                hosts[i], phrase, 0));
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-
-
-        #endregion
 
 
 
 
 
 
-    }
 
-    public class BadChatLinks
-    {
-        public string host { get; set; }
-        public string phrase { get; set; }
     }
 
     public class SkypeChats

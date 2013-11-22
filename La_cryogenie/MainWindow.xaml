@@ -60,19 +60,5 @@
                 
             </StackPanel>
         </TabItem>
-        <TabItem Header="BadChatParser">
-            <StackPanel>
-                <WrapPanel>
-                <Label Content="Login"/>
-                    <TextBox x:Name="textbox_PwGmtoolPvtLogin" Text="Operator29"/>
-                </WrapPanel>
-                <WrapPanel>
-                    <Label Content="Password"/>
-                    <PasswordBox x:Name="passwordBox_PwGmtoolPvtPassword" Password="44c5EgnT#t`!KECvb^F2Tht"/>
-                </WrapPanel>
-                <Button x:Name="button_LoginToPwGmToolPvt" Content="Login to pw.gmtool.pvt" Click="button_LoginToPwGmToolPvt_Click"/>
-                <Button x:Name="button_StartBadChatChecking" Content="StartParsing" Click="button_StartBadChatChecking_Click"/>
-            </StackPanel>
-        </TabItem>
     </TabControl>
 </Window>
