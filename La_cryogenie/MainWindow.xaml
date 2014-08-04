@@ -1,64 +1,60 @@
-﻿<Window 
+﻿<Window x:Class="La_cryogenie.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="La_cryogenie.MainWindow"
-        
-        Title="La_cryogenie" Icon="snowflake_iphone.ico" d:DesignWidth="625" d:DesignHeight="262" SizeToContent="WidthAndHeight">
-    <TabControl>
-        <TabItem Header="Controls">
-            <StackPanel>
-                <Button x:Name="button_StartBot" Content="Start" Click="button_StartBot_Click" Margin="2"/>
-
-                <ListView x:Name="listView_Chats">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Friendly Chatname" DisplayMemberBinding="{Binding friendlyChatName}"/>
-                            <GridViewColumn Header="DB Chatname" DisplayMemberBinding="{Binding dBChatname}"/>
-                            <GridViewColumn Header="Count of members" DisplayMemberBinding="{Binding CountOfMembers}"/>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-                <Button x:Name="button_acceptSelectedChats" Content="Accept Selected Chats" Click="button_acceptSelectedChats_Click" Margin="2"/>
-            </StackPanel>
-        </TabItem>
-        <TabItem Header="Log">
-            <RichTextBox x:Name="richTextBox_MessageLog" MinHeight="20" MaxWidth="400" MaxHeight="500" VerticalScrollBarVisibility="Auto" Margin="5"/>
-        </TabItem>
-        <TabItem Header="Status">
-            <StackPanel>
-                <WrapPanel>
-                    <Label Content="Attached to skype?"/>
-                    <Label x:Name="label_IsAttachedToSkype" Content=""/>
-                </WrapPanel>
-
-
-            </StackPanel>
-        </TabItem>
-        <TabItem Header="No Owner">
-            <StackPanel>
-                <WrapPanel>
-                    <Label Content="NoOwner Check Started?"/>
-                    <Label x:Name="label_IsNoOwnerStarted" Content=""/>
-                </WrapPanel>
-                <WrapPanel>
-                    <Label Content="NoOwner Checks count:"/>
-                    <Label x:Name="label_NoOwnerChecksCount" Content=""/>
-                </WrapPanel>
-                <StackPanel>
-                    <Button x:Name="button_NoOwnerStart" Content="NoOwner Start" Click="button_NoOwnerStart_Click" Margin="2"/>
-                    <Button x:Name="button_NoOwnerStop" Content="NoOwner Stop" Click="button_NoOwnerStop_Click" Margin="2" />
-                </StackPanel>
-            </StackPanel>
-        </TabItem>
-        <TabItem Header="Notices">
-            <StackPanel>
-                <Button x:Name="button_StartCheckingNotices" Content="Start Checking Notices" Click="button_StartCheckingNotices_Click"/>
-                <WrapPanel>
-                    <Label Content="Notices checker count:"/>
-                    <Label x:Name="label_NoticesCheckerCount" Content=""/>
-                </WrapPanel>
-                
-            </StackPanel>
-        </TabItem>
-    </TabControl>
+        Title="MainWindow" Height="364" Width="747" Icon="1393642942_23178.ico">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Menu x:Name="menu_Main"  Margin="0,0,0,264.245" Grid.RowSpan="3">
+            <MenuItem Header="File">
+                <MenuItem x:Name="menuitem_File_Exit" Header="Exit" Click="menuitem_File_Exit_Click"/>
+            </MenuItem>
+            <MenuItem Header="Skype">
+                <MenuItem x:Name="menuitem_Skype_Attach" Header="Попытаться прикрепиться" Click="menuitem_Skype_Attach_Click"/>
+            </MenuItem>
+        </Menu>
+        <StackPanel Grid.Row="1">
+        <TextBox x:Name="textBox_log" Grid.Row="1" MaxHeight="200" MaxWidth="800" Margin="5" VerticalScrollBarVisibility="Auto">Внутренний лог</TextBox>
+        <TextBox x:Name="textBox_skypeCommandsLog" Grid.Row="1" MaxHeight="200" MaxWidth="800" Margin="5" VerticalScrollBarVisibility="Auto">Лог команд из скайпа</TextBox>
+        <TextBox x:Name="textBox_badChatUpdateLog" Grid.Row="1" MaxHeight="200" MaxWidth="800" Margin="5" VerticalScrollBarVisibility="Auto">Лог проверки бедчат</TextBox>
+        </StackPanel>
+        <DockPanel Grid.Row="3" VerticalAlignment="Bottom">
+            <StatusBar>
+                <StatusBar.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </ItemsPanelTemplate>
+                </StatusBar.ItemsPanel>
+                <StatusBarItem>
+                    <TextBlock x:Name="textblock_StatusBar1">Ready</TextBlock>
+                </StatusBarItem>
+                <StatusBarItem Grid.Column="1">
+                    <ProgressBar Value="0" Width="80" Height="18"/>
+                </StatusBarItem>
+                <StatusBarItem Grid.Column="2">
+                    <TextBlock x:Name="textblock_StatusBar2">Set</TextBlock>
+                </StatusBarItem>
+                <StatusBarItem Grid.Column="3">
+                    <TextBlock>Go!</TextBlock>
+                </StatusBarItem>
+            </StatusBar>
+        </DockPanel>
+    </Grid>
 </Window>

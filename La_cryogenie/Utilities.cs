@@ -1,23 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace La_cryogenie
 {
-    public static class Utilities
+    class Utilities
     {
+
+        public static long getCurrentUnixTime()
+        {
+            return (long) (DateTime.Now.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+        }
+
         public static DateTime convertFromUnixTimestamp(double unixtime)
         {
             DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
             return origin.AddSeconds(unixtime);
-        }
-
-        public static double getCurrentUnixTime()
-        {
-            return (DateTime.Now - new DateTime(1970, 1, 1)).TotalSeconds;
         }
 
         private const string HTML_TAG_PATTERN = "<.*?>";
@@ -25,6 +23,5 @@ namespace La_cryogenie
         {
             return Regex.Replace(inputString, HTML_TAG_PATTERN, string.Empty);
         }
-        
     }
 }

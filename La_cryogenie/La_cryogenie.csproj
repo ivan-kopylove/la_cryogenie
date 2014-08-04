@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EA023419-F9C0-476B-B944-5861A56CA7F0}</ProjectGuid>
+    <ProjectGuid>{8F7AAB60-F930-4C5B-8F89-F9031683F424}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>La_cryogenie</RootNamespace>
@@ -13,6 +13,8 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -25,12 +27,11 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -38,8 +39,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -49,67 +50,67 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>snowflake_iphone.ico</ApplicationIcon>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>1393642942_23178.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HigLabo.Data">
-      <HintPath>..\packages\HigLabo.2.3.4.0\lib\net40\HigLabo.Data.dll</HintPath>
+    <Reference Include="ActiveUp.Net.Common">
+      <HintPath>..\packages\MailSystem.NET.2.0.1\lib\ActiveUp.Net.Common.dll</HintPath>
     </Reference>
-    <Reference Include="HigLabo.Mail">
-      <HintPath>..\packages\HigLabo.2.3.4.0\lib\net40\HigLabo.Mail.dll</HintPath>
+    <Reference Include="ActiveUp.Net.Dns">
+      <HintPath>..\packages\MailSystem.NET.2.0.1\lib\ActiveUp.Net.Dns.dll</HintPath>
     </Reference>
-    <Reference Include="HigLabo.Net">
-      <HintPath>..\packages\HigLabo.2.3.4.0\lib\net40\HigLabo.Net.dll</HintPath>
+    <Reference Include="ActiveUp.Net.Groupware">
+      <HintPath>..\packages\MailSystem.NET.2.0.1\lib\ActiveUp.Net.Groupware.dll</HintPath>
     </Reference>
-    <Reference Include="HigLabo.Net.BoxNet">
-      <HintPath>..\packages\HigLabo.2.3.4.0\lib\net40\HigLabo.Net.BoxNet.dll</HintPath>
+    <Reference Include="ActiveUp.Net.Imap4">
+      <HintPath>..\packages\MailSystem.NET.2.0.1\lib\ActiveUp.Net.Imap4.dll</HintPath>
     </Reference>
-    <Reference Include="HigLabo.Net.Dropbox">
-      <HintPath>..\packages\HigLabo.2.3.4.0\lib\net40\HigLabo.Net.Dropbox.dll</HintPath>
+    <Reference Include="ActiveUp.Net.Mail">
+      <HintPath>..\packages\MailSystem.NET.2.0.1\lib\ActiveUp.Net.Mail.dll</HintPath>
     </Reference>
-    <Reference Include="HigLabo.Net.Facebook">
-      <HintPath>..\packages\HigLabo.2.3.4.0\lib\net40\HigLabo.Net.Facebook.dll</HintPath>
+    <Reference Include="ActiveUp.Net.Nntp">
+      <HintPath>..\packages\MailSystem.NET.2.0.1\lib\ActiveUp.Net.Nntp.dll</HintPath>
     </Reference>
-    <Reference Include="HigLabo.Net.Ftp">
-      <HintPath>..\packages\HigLabo.2.3.4.0\lib\net40\HigLabo.Net.Ftp.dll</HintPath>
+    <Reference Include="ActiveUp.Net.OpenPGP">
+      <HintPath>..\packages\MailSystem.NET.2.0.1\lib\ActiveUp.Net.OpenPGP.dll</HintPath>
     </Reference>
-    <Reference Include="HigLabo.Net.Rss">
-      <HintPath>..\packages\HigLabo.2.3.4.0\lib\net40\HigLabo.Net.Rss.dll</HintPath>
+    <Reference Include="ActiveUp.Net.Pop3">
+      <HintPath>..\packages\MailSystem.NET.2.0.1\lib\ActiveUp.Net.Pop3.dll</HintPath>
     </Reference>
-    <Reference Include="HigLabo.Net.SugarSync">
-      <HintPath>..\packages\HigLabo.2.3.4.0\lib\net40\HigLabo.Net.SugarSync.dll</HintPath>
+    <Reference Include="ActiveUp.Net.Smtp">
+      <HintPath>..\packages\MailSystem.NET.2.0.1\lib\ActiveUp.Net.Smtp.dll</HintPath>
     </Reference>
-    <Reference Include="HigLabo.Net.Twitter">
-      <HintPath>..\packages\HigLabo.2.3.4.0\lib\net40\HigLabo.Net.Twitter.dll</HintPath>
+    <Reference Include="ActiveUp.Net.WhoIs">
+      <HintPath>..\packages\MailSystem.NET.2.0.1\lib\ActiveUp.Net.WhoIs.dll</HintPath>
     </Reference>
-    <Reference Include="HigLabo.Net.WindowsLive">
-      <HintPath>..\packages\HigLabo.2.3.4.0\lib\net40\HigLabo.Net.WindowsLive.dll</HintPath>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="HigLabo.WindowsAzure.RestService">
-      <HintPath>..\packages\HigLabo.2.3.4.0\lib\net40\HigLabo.WindowsAzure.RestService.dll</HintPath>
-    </Reference>
-    <Reference Include="HtmlAgilityPack">
-      <HintPath>..\packages\HtmlAgilityPack.1.4.6\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\HigLabo.2.3.4.0\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="NLog">
-      <HintPath>..\packages\NLog.2.0.1.2\lib\net45\NLog.dll</HintPath>
+      <HintPath>..\packages\HigLabo.2.3.6.0\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite">
-      <HintPath>..\packages\System.Data.SQLite.x86.1.0.88.0\lib\net45\System.Data.SQLite.dll</HintPath>
+      <HintPath>..\packages\System.Data.SQLite.x86.1.0.91.3\lib\net45\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6">
+      <HintPath>..\packages\System.Data.SQLite.x86.1.0.91.3\lib\net45\System.Data.SQLite.EF6.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.SQLite.Linq">
-      <HintPath>..\packages\System.Data.SQLite.x86.1.0.88.0\lib\net45\System.Data.SQLite.Linq.dll</HintPath>
+      <HintPath>..\packages\System.Data.SQLite.x86.1.0.91.3\lib\net45\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
-    <Reference Include="System.EnterpriseServices" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -127,16 +128,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BadLink.cs" />
-    <Compile Include="EmailToHoster.cs" />
-    <Compile Include="SkypeStatic.cs" />
+    <Compile Include="Browser.cs" />
+    <Compile Include="Chats.cs" />
+    <Compile Include="commands\CheatPortal.cs" />
+    <Compile Include="commands\GoldSellerLink.cs" />
+    <Compile Include="commands\MalwareLink.cs" />
+    <Compile Include="commands\PhishingLink.cs" />
+    <Compile Include="commands\Stat.cs" />
+    <Compile Include="commands\Ireport.cs" />
+    <Compile Include="commands\Unreported.cs" />
+    <Compile Include="CyberMailer.cs" />
+    <Compile Include="DomainTools.cs" />
+    <Compile Include="timed\AutoReportSingletone.cs" />
+    <Compile Include="Hoster.cs" />
+    <Compile Include="InitializeApp.cs" />
+    <Compile Include="NoticesSingleton.cs" />
+    <Compile Include="PredefGenerator.cs" />
+    <Compile Include="SelfTestSingleton.cs" />
     <Compile Include="Sqlite.cs" />
+    <Compile Include="NoOwnerSingleton.cs" />
     <Compile Include="Utilities.cs" />
-    <Compile Include="Web References\ru.mail.confluence\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
+    <Compile Include="WindowsHandler.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -145,19 +157,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Badresource.cs" />
-    <Compile Include="DomainTools.cs" />
-    <Compile Include="Globals.cs" />
+    <Compile Include="SkypeChatHandler.cs" />
+    <Compile Include="SkypeSingleton.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NetTools.cs" />
-    <Compile Include="NoOwner.cs" />
-    <Compile Include="Notices.cs" />
-    <Compile Include="PhishingInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -175,84 +182,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Content Include="NLog.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Include="NLog.xsd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="Web References\ru.mail.confluence\confluenceservice-v2.wsdl" />
-    <None Include="Web References\ru.mail.confluence\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\ru.mail.confluence\RemoteAttachment.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ru.mail.confluence\RemoteBlogEntry.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ru.mail.confluence\RemoteBlogEntrySummary.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ru.mail.confluence\RemoteClusterInformation.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ru.mail.confluence\RemoteComment.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ru.mail.confluence\RemoteConfluenceUser.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ru.mail.confluence\RemoteContentPermissionSet.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ru.mail.confluence\RemoteContentSummaries.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ru.mail.confluence\RemoteLabel.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ru.mail.confluence\RemoteNodeStatus.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ru.mail.confluence\RemotePage.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ru.mail.confluence\RemotePageHistory.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ru.mail.confluence\RemotePageSummary.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ru.mail.confluence\RemotePermission.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ru.mail.confluence\RemoteSearchResult.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ru.mail.confluence\RemoteServerInfo.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ru.mail.confluence\RemoteSpace.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ru.mail.confluence\RemoteSpaceGroup.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ru.mail.confluence\RemoteSpaceSummary.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ru.mail.confluence\RemoteUser.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ru.mail.confluence\RemoteUserInformation.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -267,25 +202,6 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="snowflake_iphone.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <WebReferences Include="Web References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WebReferenceUrl Include="https://confluence.mail.ru/rpc/soap-axis/confluenceservice-v2%3fWSDL">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\ru.mail.confluence\</RelPath>
-      <UpdateFromURL>https://confluence.mail.ru/rpc/soap-axis/confluenceservice-v2%3fWSDL</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>La_cryogenie_ru_mail_confluence_ConfluenceSoapServiceService</CachedSettingsPropName>
-    </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
@@ -303,6 +219,15 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="1393642942_23178.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\!MyLibs\FishLib\FishLib\FishLib.csproj">
+      <Project>{6e50af24-b58c-4693-b9f8-ee7f797a8690}</Project>
+      <Name>FishLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

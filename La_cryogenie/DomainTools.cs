@@ -11,12 +11,25 @@ namespace La_cryogenie
 {
     class DomainTools
     {
-        private static String timestamp()
+        public string xml { get; set; }
+        public List<string> nServers = new List<string>();
+
+        public DomainTools(string host)
+        {
+            xml = setXML(host);
+            if (xml != null)
+            {
+                setNservers(xml);
+            }
+
+        }
+
+        private String timestamp()
         {
             return DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ");
         }
 
-        private static String sign(String api_username, String key, String timestamp, String uri)
+        private String sign(String api_username, String key, String timestamp, String uri)
         {
             ASCIIEncoding encoder = new ASCIIEncoding();
             byte[] data = encoder.GetBytes(api_username + timestamp + uri);
@@ -28,65 +41,61 @@ namespace La_cryogenie
             return hex.Replace("-", "").ToLower();
         }
 
-        private static string stringBuilder(string domain)
+        private string stringBuilder(string domain)
         {
             String api_username = "devstealthwar";
             String key = "760d8-0a6d1-d598e-aa06d-3f74b";
             String uri = string.Format("/v1/{0}/whois", domain);
             String host = "freeapi.domaintools.com";
 
-            String timestamp = DomainTools.timestamp();
-            String signature = DomainTools.sign(api_username, key, timestamp, uri);
+            String timestamp = this.timestamp();
+            String signature = this.sign(api_username, key, timestamp, uri);
 
             string url = string.Format("http://{0}{1}?format=xml&api_username={2}&signature={3}&timestamp={4}", host, uri, api_username, signature, timestamp);
             return url;
         }
 
-
-        static public string getXML(string domain)
+        private string setXML(string domain)
         {
             string fullURL = stringBuilder(domain);
+            SkypeSingleton.Instance.sendMessage(Chats.AutoReports, fullURL);
             try
             {
-                var request1 = (HttpWebRequest)WebRequest.Create(fullURL);
-                using (var response1 = request1.GetResponse())
+                var request = (HttpWebRequest)WebRequest.Create(fullURL);
+                using (var response = request.GetResponse())
                 {
-                    using (var responseStream = response1.GetResponseStream())
+                    using (var responseStream = response.GetResponseStream())
                     {
-                        StreamReader reader = new StreamReader(response1.GetResponseStream());
-
-                        return reader.ReadToEnd();//2
+                        StreamReader reader = new StreamReader(response.GetResponseStream());
+                        return reader.ReadToEnd();
                     }
                 }
 
             }
-            //обработка исключений
-            catch (WebException ex)
+            catch (Exception)
             {
                 return null;
             }
-
         }
 
-        public static string getHoster(string xml)
+        public void setNservers(string xml)
         {
-            string retunLine = null;
-
             using (StringReader reader = new StringReader(xml))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    if (line.Contains("nserver") || line.Contains("name_servers") || line.Contains("Name Server"))
+                    if (line.Contains("nserver"))// || line.Contains("name_servers") || line.Contains("Name Server"))
                     {
-                        retunLine += line + Environment.NewLine;
+                        string[] splittedLine = line.Split(' ');
+                        string ns = splittedLine[splittedLine.Length - 1];
+                        nServers.Add(ns);
                     }
                 }
             }
-            return retunLine;
         }
 
-        public static string getEmails(string xml)
+        public string getEmails(string xml)
         {
             string retunLine = null;
             using (StringReader reader = new StringReader(xml))
@@ -102,6 +111,22 @@ namespace La_cryogenie
             }
             return retunLine;
 
+        }
+
+        public bool hasXml
+        {
+            get
+            {
+                if (xml == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            private set { ; }
         }
     }
 }

@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace La_cryogenie
 {
     public static class Sqlite
     {
-        private const string dataSourceFile = @"C:\Users\i.kopylov\Desktop\Antiphishing\antiphishing.sqlite";
+        private const string dataSourceFile = @"C:\Users\i.kopylov\Desktop\db\!antiphishing_v2.sqlite";
 
         public static DataTable executeSearch(string sqliteCommand)
         {
@@ -46,7 +41,6 @@ namespace La_cryogenie
 
             using (SQLiteCommand command = new SQLiteCommand(connection))
             {
-
                 command.CommandText = sqliteCommand;
                 command.CommandType = CommandType.Text;
                 command.ExecuteNonQuery();
