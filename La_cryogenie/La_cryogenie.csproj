@@ -128,7 +128,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Browser.cs" />
     <Compile Include="Chats.cs" />
     <Compile Include="commands\CheatPortal.cs" />
     <Compile Include="commands\GoldSellerLink.cs" />

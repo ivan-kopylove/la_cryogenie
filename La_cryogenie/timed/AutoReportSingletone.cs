@@ -117,14 +117,14 @@ namespace La_cryogenie
             URLTools urtool = new URLTools(uri);
             PhishingLink ph = new PhishingLink(urtool.host);
 
-            if (ph.alreadyInDb())
+            if (ph.HasDbRecord)
             {
                 //уже в базе
-                if (ph.reported())
+                if (ph.IsReported)
                 {
                     SkypeSingleton.Instance.sendMessage(Chats.AutoReports,
                     string.Format("[Авторепорт] «{0}» уже сдан мне. Последний раз отправляли хостеру {1}",
-                    urtool.host, ph.LastReportToHosterString));
+                    urtool.host, ph.LastReportToHoster.ToString()));
                 }
                 else
                 {

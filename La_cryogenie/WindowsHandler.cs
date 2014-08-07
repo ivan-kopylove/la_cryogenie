@@ -37,10 +37,7 @@ namespace La_cryogenie
 		 
 	#endregion
         
-        public static void statusbar1_log(string text)
-        {
-            MainWindow.textblock_StatusBar1.Text = text;
-        }
+
 
         public static void statusbar2_log(string text)
         {

@@ -139,31 +139,5 @@ namespace La_cryogenie
                 }
             }
         }
-
-        /*
-        public void postListOfNotices()
-        {
-            if (activeNotices.Rows.Count == 0)
-            {
-                SkypeStatic.sendMessage(msg.ChatName, "Нет активных уведомлений.");
-            }
-            else
-            {
-                string result = "# | Проект | Время запуска | Осталось запусков | Дни недели | Текст\n";
-                foreach (DataRow row in Globals.listOfActiveNotices.Rows)
-                {
-                    int rowid = (int)row.Field<long>("id");
-                    string project = row.Field<string>("project");
-                    string start = row.Field<string>("start");
-                    string text = row.Field<string>("text");
-                    string daysOfWeek = row.Field<string>("daysofweek");
-                    int runtimes = (int)row.Field<long>("runtimes");
-                    result += string.Format("{0} | {1} | {2} | {3} | {4} | {5}\n", rowid, project, start, runtimes, daysOfWeek, text);
-                    result += "========================\n";
-                }
-                SkypeSingleton.Instance.sendMessage(msg.ChatName, result);
-            }
-        }
-         */
     }
 }

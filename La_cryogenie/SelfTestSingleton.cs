@@ -44,8 +44,6 @@ namespace La_cryogenie
 
         }
 
-        
-
         private static void SelfTestTimer_Tick(object sender, EventArgs e)
         {
             DateTime currentTime = DateTime.Now;
