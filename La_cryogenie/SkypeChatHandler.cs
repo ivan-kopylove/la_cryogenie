@@ -1,5 +1,6 @@
 ﻿using FishLib;
 using SKYPE4COMLib;
+using System;
 using System.Data;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -266,7 +267,6 @@ namespace La_cryogenie
                 case "phishing":
                 case "заебали":
                 case "хуишинг":
-
                     if (isCommandLengthError(commandArguments, 3))
                     {
                         SkypeSingleton.Instance.sendMessage(msg.ChatName, string.Format("{0}, ошибка в синтаксисе. Нужно так: \"!{1} [ссылка] проекты_через_запятую\"", msg.Sender.FullName, commandArguments[0]));
@@ -279,8 +279,6 @@ namespace La_cryogenie
                         return;
                     }
 
-
-
                     urltool = new URLTools(commandArguments[1]);
 
                     if (urltool.host == null)
@@ -290,17 +288,23 @@ namespace La_cryogenie
                         return;
                     }
 
-
-
                     PhishingLink ph = new PhishingLink(urltool.host);
-                    if (ph.alreadyInDb())
+                    if (ph.HasDbRecord)
                     {
-                        //уже в базе
-                        if (ph.reported())
+                        if (ph.IsReported)
                         {
                             SkypeSingleton.Instance.sendMessage(msg.ChatName,
                             string.Format("{0}, «{1}» уже сдан мне. Последний раз отправляли хостеру {2}",
-                            msg.Sender.FullName, urltool.host, ph.LastReportToHosterString));
+                            msg.Sender.FullName, urltool.host, ph.LastReportToHoster.ToString()));
+
+                            TimeSpan ts = new TimeSpan(2, 0, 0, 0);
+                            if (DateTime.Now - ph.LastReportToHoster > ts)
+                            {
+                                SkypeSingleton.Instance.sendMessage(msg.ChatName,
+                                string.Format("По всей видимости, за {0} дня ресурс не забыл закрыт. «{1}» помечен как неотправленный",
+                                ts.Days, urltool.host));
+                                ph.markUnSent(urltool.host);
+                            }
                         }
                         else
                         {

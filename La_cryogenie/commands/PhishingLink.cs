@@ -10,20 +10,20 @@ namespace La_cryogenie
 {
     class PhishingLink
     {
-        URLTools uri;
         private DataTable LinksTable;
 
-        public string LastReportToHosterString
+        public DateTime LastReportToHoster
         {
             get
             {
-                return Utilities.convertFromUnixTimestamp(LinksTable.Rows[0].Field<long>("last_report_to_hoster")).ToString();
+                return Utilities.convertFromUnixTimestamp(LinksTable.Rows[0].Field<long>("last_report_to_hoster"));
             }
             private set
             {
                 ;
             }
         }
+
         public PhishingLink(string urlHost)
         {
             LinksTable = Sqlite.executeSearch(string.Format(
@@ -31,15 +31,22 @@ namespace La_cryogenie
             urlHost));
         }
 
-        public bool alreadyInDb()
+        public bool HasDbRecord
         {
-            if (LinksTable.Rows.Count == 0)
+            get
             {
-                return false;
+                if (LinksTable.Rows.Count == 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
             }
-            else
+            private set
             {
-                return true;
+                ;
             }
         }
 
@@ -50,15 +57,29 @@ namespace La_cryogenie
             reporter_to_chat, reporter_to_hoster, host, original_url, game_projects, last_seen, last_report_to_hoster));
         }
 
-        public bool reported()
+        public void markUnSent(string host)
         {
-            if (LinksTable.Rows[0].Field<long>("last_report_to_hoster") == 0)
+            Sqlite.executeVoid(string.Format(
+            @"UPDATE [links] SET last_seen = {0}, last_report_to_hoster = 0 WHERE host = '{1}'",
+            Utilities.getCurrentUnixTime(), host));
+        }
+
+        public bool IsReported
+        {
+            get
             {
-                return false;
+                if (LinksTable.Rows[0].Field<long>("last_report_to_hoster") == 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
             }
-            else
+            private set
             {
-                return true;
+                ;
             }
         }
     }
