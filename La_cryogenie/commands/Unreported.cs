@@ -23,7 +23,7 @@ namespace La_cryogenie
             DataTable phishingUrls = Sqlite.executeSearch(string.Format("SELECT * FROM [links] WHERE last_report_to_hoster = 0 AND (category = 'phishing_page' OR category = 'malware');"));
             if (phishingUrls.Rows.Count == 0)
             {
-                SkypeSingleton.Instance.sendMessage(msg.ChatName, string.Format("Нет неотправленных жалоб"));
+                SkypeSingleton.Instance.sendChatMessage(msg.ChatName, string.Format("Нет неотправленных жалоб"));
                 return;
             }
             else
@@ -37,7 +37,7 @@ namespace La_cryogenie
                         row.Field<string>("game_projects"), row.Field<string>("original_url")
                         );
                 }
-                SkypeSingleton.Instance.sendMessage(msg.ChatName, result);
+                SkypeSingleton.Instance.sendChatMessage(msg.ChatName, result);
                 return;
             }
         }

@@ -66,7 +66,7 @@ which is privileged and confidential. Thank you.";
             }
             catch (Exception ex)
             {
-                SkypeSingleton.Instance.sendMessage(Chats.botCommandChat, "Проблема с выполнением «smtpClient.Send(mailMessage)» === " + ex.Message);
+                SkypeSingleton.Instance.sendChatMessage(Chats.botCommandChat, "Проблема с выполнением «smtpClient.Send(mailMessage)» === " + ex.Message);
             }
         }
 

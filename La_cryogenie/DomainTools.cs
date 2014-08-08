@@ -58,7 +58,7 @@ namespace La_cryogenie
         private string setXML(string domain)
         {
             string fullURL = stringBuilder(domain);
-            SkypeSingleton.Instance.sendMessage(Chats.AutoReports, fullURL);
+            SkypeSingleton.Instance.sendChatMessage(Chats.AutoReports, fullURL);
             try
             {
                 var request = (HttpWebRequest)WebRequest.Create(fullURL);

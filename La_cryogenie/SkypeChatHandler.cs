@@ -29,7 +29,7 @@ namespace La_cryogenie
                     UserCollection botBusers_users = msg.Users;
                     foreach (User user in botBusers_users)
                     {
-                        SkypeSingleton.Instance.sendMessage(msg.ChatName, @"Привет! Это чат противодействия спам-ботам.
+                        SkypeSingleton.Instance.sendChatMessage(msg.ChatName, @"Привет! Это чат противодействия спам-ботам.
 При помощи команд мне сдаются мошеннические ссылки.
 Если ты увидел в тикете, чатлогах или на сторонних ресурсах ссылку на вредоносный ресурс (фишинг, продажа игровых ценностей за реал, и т.п.), то зарепортить можно в этот чат.
 В заголовке чата есть ссылка на инструкцию.");
@@ -39,7 +39,7 @@ namespace La_cryogenie
                     UserCollection sector_users = msg.Users;
                     foreach (User user in sector_users)
                     {
-                        SkypeSingleton.Instance.sendMessage(msg.ChatName, @"Привет! Это чат с Сектором расследований.
+                        SkypeSingleton.Instance.sendChatMessage(msg.ChatName, @"Привет! Это чат с Сектором расследований.
 Здесь можно задать вопрос касательно обработки запросов по взломам. 
 Не забывай ставить тег проекта, когда задаешь вопрос.");
                     }
@@ -48,7 +48,7 @@ namespace La_cryogenie
                     UserCollection commandChat_users = msg.Users;
                     foreach (User user in commandChat_users)
                     {
-                        SkypeSingleton.Instance.sendMessage(msg.ChatName, @"Привет! Это командный чат бота. Здесь мной управляют.");
+                        SkypeSingleton.Instance.sendChatMessage(msg.ChatName, @"Привет! Это командный чат бота. Здесь мной управляют.");
                     }
                     break;
                 default:
@@ -185,7 +185,7 @@ namespace La_cryogenie
             {
                 if (splittedProject.Length > 3)
                 {
-                    SkypeSingleton.Instance.sendMessage(msg.ChatName,
+                    SkypeSingleton.Instance.sendChatMessage(msg.ChatName,
                     string.Format("{0}, длина аббревиатуры проекта ({1}) не должна превышать трёх символов",
                     msg.Sender.FullName, splittedProject));
                     return false;
@@ -198,7 +198,7 @@ namespace La_cryogenie
                  */
                 if (Regex.Match(splittedProject, @"[^A-za-z]").Success)
                 {
-                    SkypeSingleton.Instance.sendMessage(msg.ChatName,
+                    SkypeSingleton.Instance.sendChatMessage(msg.ChatName,
                     string.Format("{0}, аббревиатура проекта ({1}) должна быть написана латинскими буквами",
                     msg.Sender.FullName, splittedProject));
                     return false;
@@ -230,7 +230,7 @@ namespace La_cryogenie
 
             if (msg.Body.Contains("vk.com/"))
             {
-                SkypeSingleton.Instance.sendMessage(msg.ChatName, "Неугодные сообщества vk.com следует передавать КМам в комменты на странице:\nhttps://confluence.mail.ru/x/0KjRAQ");
+                SkypeSingleton.Instance.sendChatMessage(msg.ChatName, "Неугодные сообщества vk.com следует передавать КМам в комменты на странице:\nhttps://confluence.mail.ru/x/0KjRAQ");
                 return;
             }
             string game_projects = null;
@@ -241,7 +241,7 @@ namespace La_cryogenie
             {
                 case "test":
                 case "тест":
-                    SkypeSingleton.Instance.sendMessage(msg.ChatName, string.Format("{0}", commandArguments[0]));
+                    SkypeSingleton.Instance.sendChatMessage(msg.ChatName, string.Format("{0}", commandArguments[0]));
                     break;
                 case "стат":
                 case "stat":
@@ -269,7 +269,7 @@ namespace La_cryogenie
                 case "хуишинг":
                     if (isCommandLengthError(commandArguments, 3))
                     {
-                        SkypeSingleton.Instance.sendMessage(msg.ChatName, string.Format("{0}, ошибка в синтаксисе. Нужно так: \"!{1} [ссылка] проекты_через_запятую\"", msg.Sender.FullName, commandArguments[0]));
+                        SkypeSingleton.Instance.sendChatMessage(msg.ChatName, string.Format("{0}, ошибка в синтаксисе. Нужно так: \"!{1} [ссылка] проекты_через_запятую\"", msg.Sender.FullName, commandArguments[0]));
                         return;
                     }
 
@@ -283,7 +283,7 @@ namespace La_cryogenie
 
                     if (urltool.host == null)
                     {
-                        SkypeSingleton.Instance.sendMessage(msg.ChatName,
+                        SkypeSingleton.Instance.sendChatMessage(msg.ChatName,
                         string.Format("{0}, что-то не так в ссылке ({1}). Исправь и попробуй ещё раз", msg.Sender.FullName, urltool.original_url));
                         return;
                     }
@@ -293,14 +293,14 @@ namespace La_cryogenie
                     {
                         if (ph.IsReported)
                         {
-                            SkypeSingleton.Instance.sendMessage(msg.ChatName,
+                            SkypeSingleton.Instance.sendChatMessage(msg.ChatName,
                             string.Format("{0}, «{1}» уже сдан мне. Последний раз отправляли хостеру {2}",
                             msg.Sender.FullName, urltool.host, ph.LastReportToHoster.ToString()));
 
                             TimeSpan ts = new TimeSpan(2, 0, 0, 0);
                             if (DateTime.Now - ph.LastReportToHoster > ts)
                             {
-                                SkypeSingleton.Instance.sendMessage(msg.ChatName,
+                                SkypeSingleton.Instance.sendChatMessage(msg.ChatName,
                                 string.Format("По всей видимости, за {0} дня ресурс не забыл закрыт. «{1}» помечен как неотправленный",
                                 ts.Days, urltool.host));
                                 ph.markUnSent(urltool.host);
@@ -308,7 +308,7 @@ namespace La_cryogenie
                         }
                         else
                         {
-                            SkypeSingleton.Instance.sendMessage(msg.ChatName,
+                            SkypeSingleton.Instance.sendChatMessage(msg.ChatName,
                             string.Format("{0}, «{1}» уже сдан мне, однако, хостеру его ещё не отправляли.",
                             msg.Sender.FullName, urltool.host));
                         }
@@ -326,14 +326,14 @@ namespace La_cryogenie
                                 CyberMailer cMailer = new CyberMailer(freeHoster.AbuseEmail, predef.getBody(), predef.getSubject());
                                 cMailer.sendEmail();
 
-                                SkypeSingleton.Instance.sendMessage(msg.ChatName,
+                                SkypeSingleton.Instance.sendChatMessage(msg.ChatName,
                                 string.Format("Спасибо, {0}! Я отправила письмо хостеру «{1}» ( {2} ) на {3} с жалобой на «{4}»", msg.Sender.FullName, freeHoster.Name, freeHoster.HomePage, freeHoster.AbuseEmail, urltool.host));
                                 ph.insertNewLink(msg.Sender.Handle, SkypeSingleton.Instance.skype.CurrentUserHandle, urltool.host, urltool.original_url, game_projects, Utilities.getCurrentUnixTime(), Utilities.getCurrentUnixTime());
                                 return;
                             }
                             else
                             {
-                                SkypeSingleton.Instance.sendMessage(msg.ChatName,
+                                SkypeSingleton.Instance.sendChatMessage(msg.ChatName,
                                 string.Format("Спасибо, {0}! «{1}» принадлежит хостеру «{2}» ( {3} ). Для него не прописана почта, но есть страница обратной связи: {4} ",
                                 msg.Sender.FullName, urltool.host, freeHoster.Name, freeHoster.HomePage, freeHoster.AbusePage));
                                 ph.insertNewLink(msg.Sender.Handle, "NULL", urltool.host, urltool.original_url, game_projects, Utilities.getCurrentUnixTime(), 0);
@@ -344,7 +344,7 @@ namespace La_cryogenie
                         {
                             if (msg.Sender.Handle != "ivan.kopilov")
                             {
-                                SkypeSingleton.Instance.sendMessage(msg.ChatName,
+                                SkypeSingleton.Instance.sendChatMessage(msg.ChatName,
                                 string.Format("«{0}» помечен как неотправленный *", urltool.host));
                                 ph.insertNewLink(msg.Sender.Handle, "NULL", urltool.host, urltool.original_url, game_projects, Utilities.getCurrentUnixTime(), 0);
                                 return;
@@ -355,7 +355,7 @@ namespace La_cryogenie
                             DomainTools dt = new DomainTools(urltool.host);
                             if (!dt.hasXml)
                             {
-                                SkypeSingleton.Instance.sendMessage(msg.ChatName,
+                                SkypeSingleton.Instance.sendChatMessage(msg.ChatName,
                                 string.Format("«{0}» помечен как неотправленный **", urltool.host));
                                 ph.insertNewLink(msg.Sender.Handle, "NULL", urltool.host, urltool.original_url, game_projects, Utilities.getCurrentUnixTime(), 0);
                                 return;
@@ -375,7 +375,7 @@ namespace La_cryogenie
                                                 CyberMailer cMailer = new CyberMailer(paidHoster.AbuseEmail, predef.getBody(), predef.getSubject());
                                                 cMailer.sendEmail();
 
-                                                SkypeSingleton.Instance.sendMessage(msg.ChatName,
+                                                SkypeSingleton.Instance.sendChatMessage(msg.ChatName,
                                                 string.Format("Спасибо, {0}! Я отправила письмо хостеру «{1}» ( {2} ) на {3} с жалобой на «{4}»",
                                                 msg.Sender.FullName, paidHoster.Name, paidHoster.HomePage, paidHoster.AbuseEmail, urltool.host));
 
@@ -384,7 +384,7 @@ namespace La_cryogenie
                                             }
                                             else
                                             {
-                                                SkypeSingleton.Instance.sendMessage(msg.ChatName,
+                                                SkypeSingleton.Instance.sendChatMessage(msg.ChatName,
                                                 string.Format("Спасибо, {0}! «{1}» принадлежит хостеру «{2}» ( {3} ). Для него не прописана почта, но есть страница обратной связи: {4} ",
                                                 msg.Sender.FullName, urltool.host, paidHoster.Name, paidHoster.HomePage, paidHoster.AbusePage));
                                                 ph.insertNewLink(msg.Sender.Handle, "NULL", urltool.host, urltool.original_url, game_projects, Utilities.getCurrentUnixTime(), 0);
@@ -394,7 +394,7 @@ namespace La_cryogenie
                                     }
                                 }
 
-                                SkypeSingleton.Instance.sendMessage(msg.ChatName,
+                                SkypeSingleton.Instance.sendChatMessage(msg.ChatName,
                                 string.Format("«{0}» помечен как неотправленный ***", urltool.host));
                                 ph.insertNewLink(msg.Sender.Handle, "NULL", urltool.host, urltool.original_url, game_projects, Utilities.getCurrentUnixTime(), 0);
                             }
@@ -412,7 +412,7 @@ namespace La_cryogenie
                 case "malware":
                     if (isCommandLengthError(commandArguments, 3))
                     {
-                        SkypeSingleton.Instance.sendMessage(msg.ChatName, string.Format("{0}, ошибка в синтаксисе. Нужно так: \"!{1} [ссылка] проекты_через_запятую\"", msg.Sender.FullName, commandArguments[0]));
+                        SkypeSingleton.Instance.sendChatMessage(msg.ChatName, string.Format("{0}, ошибка в синтаксисе. Нужно так: \"!{1} [ссылка] проекты_через_запятую\"", msg.Sender.FullName, commandArguments[0]));
                         return;
                     }
 
@@ -426,7 +426,7 @@ namespace La_cryogenie
 
                     if (urltool.host == null)
                     {
-                        SkypeSingleton.Instance.sendMessage(msg.ChatName,
+                        SkypeSingleton.Instance.sendChatMessage(msg.ChatName,
                         string.Format("{0}, что-то не так в ссылке ({1}). Исправь и попробуй ещё раз", msg.Sender.FullName, urltool.original_url));
                         return;
                     }
@@ -437,13 +437,13 @@ namespace La_cryogenie
                         //уже в базе
                         if (mw.reported())
                         {
-                            SkypeSingleton.Instance.sendMessage(msg.ChatName,
+                            SkypeSingleton.Instance.sendChatMessage(msg.ChatName,
                             string.Format("{0}, «{1}» уже сдан мне. Последний раз отправляли хостеру {2}",
                             msg.Sender.FullName, urltool.original_url, mw.LastReportToHosterString));
                         }
                         else
                         {
-                            SkypeSingleton.Instance.sendMessage(msg.ChatName,
+                            SkypeSingleton.Instance.sendChatMessage(msg.ChatName,
                             string.Format("{0}, «{1}» уже сдан мне, однако, хостеру его ещё не отправляли.",
                             msg.Sender.FullName, urltool.original_url));
                         }
@@ -459,14 +459,14 @@ namespace La_cryogenie
                                 CyberMailer cMailer = new CyberMailer(freeHoster.AbuseEmail, predef.getBody(), predef.getSubject());
                                 cMailer.sendEmail();
 
-                                SkypeSingleton.Instance.sendMessage(msg.ChatName,
+                                SkypeSingleton.Instance.sendChatMessage(msg.ChatName,
                                 string.Format("Спасибо, {0}! Я отправила письмо хостеру «{1}» ( {2} ) на {3} с жалобой на «{4}»", msg.Sender.FullName, freeHoster.Name, freeHoster.HomePage, freeHoster.AbuseEmail, urltool.original_url));
                                 mw.insertNewLink(msg.Sender.Handle, SkypeSingleton.Instance.skype.CurrentUserHandle, urltool.host, urltool.original_url, game_projects, Utilities.getCurrentUnixTime(), Utilities.getCurrentUnixTime());
                                 return;
                             }
                             else
                             {
-                                SkypeSingleton.Instance.sendMessage(msg.ChatName,
+                                SkypeSingleton.Instance.sendChatMessage(msg.ChatName,
                                 string.Format("Спасибо, {0}! «{1}» принадлежит хостеру «{2}» ( {3} ). Для него не прописана почта, но есть страница обратной связи: {4} ",
                                 msg.Sender.FullName, urltool.host, freeHoster.Name, freeHoster.HomePage, freeHoster.AbusePage));
                                 mw.insertNewLink(msg.Sender.Handle, "NULL", urltool.host, urltool.original_url, game_projects, Utilities.getCurrentUnixTime(), 0);
@@ -475,7 +475,7 @@ namespace La_cryogenie
                         }
                         else
                         {
-                            SkypeSingleton.Instance.sendMessage(msg.ChatName,
+                            SkypeSingleton.Instance.sendChatMessage(msg.ChatName,
                             string.Format("Записей о домене второго уровня «{0}» в базе бесплатных хостингов не найдено. «{1}» помечен как неотправленный.",
                             urltool.secondLevelDomain, urltool.host));
                             mw.insertNewLink(msg.Sender.Handle, "NULL", urltool.host, urltool.original_url, game_projects, Utilities.getCurrentUnixTime(), 0);
@@ -490,7 +490,7 @@ namespace La_cryogenie
                 case "читоры":
                     if (isCommandLengthError(commandArguments, 3))
                     {
-                        SkypeSingleton.Instance.sendMessage(msg.ChatName, string.Format("{0}, ошибка в синтаксисе. Нужно так: \"!{1} [ссылка] проекты_через_запятую\"", msg.Sender.FullName, commandArguments[0]));
+                        SkypeSingleton.Instance.sendChatMessage(msg.ChatName, string.Format("{0}, ошибка в синтаксисе. Нужно так: \"!{1} [ссылка] проекты_через_запятую\"", msg.Sender.FullName, commandArguments[0]));
                         return;
                     }
 
@@ -504,7 +504,7 @@ namespace La_cryogenie
 
                     if (urltool.host == null)
                     {
-                        SkypeSingleton.Instance.sendMessage(msg.ChatName,
+                        SkypeSingleton.Instance.sendChatMessage(msg.ChatName,
                         string.Format("{0}, что-то не так в ссылке ({1}). Исправь и попробуй ещё раз", msg.Sender.FullName, urltool.original_url));
                         return;
                     }
@@ -512,12 +512,12 @@ namespace La_cryogenie
                     CheatPortal cPortal = new CheatPortal(urltool.host);
                     if (cPortal.alreadyInDb())
                     {
-                        SkypeSingleton.Instance.sendMessage(msg.ChatName, string.Format("Спасибо, {0}! Я обновила статус активности «{1}»", msg.Sender.FullName, urltool.host));
+                        SkypeSingleton.Instance.sendChatMessage(msg.ChatName, string.Format("Спасибо, {0}! Я обновила статус активности «{1}»", msg.Sender.FullName, urltool.host));
                         cPortal.updateLink(game_projects);
                     }
                     else
                     {
-                        SkypeSingleton.Instance.sendMessage(msg.ChatName, string.Format("Спасибо, {0}! Ты первый добавил «{1}»", msg.Sender.FullName, urltool.host));
+                        SkypeSingleton.Instance.sendChatMessage(msg.ChatName, string.Format("Спасибо, {0}! Ты первый добавил «{1}»", msg.Sender.FullName, urltool.host));
                         cPortal.insertNewLink(msg.Sender.Handle, "NULL", urltool.host, urltool.original_url, game_projects, Utilities.getCurrentUnixTime(), -1);
                     }
                     break;
@@ -530,7 +530,7 @@ namespace La_cryogenie
 
                     if (isCommandLengthError(commandArguments, 3))
                     {
-                        SkypeSingleton.Instance.sendMessage(msg.ChatName, string.Format("{0}, ошибка в синтаксисе. Нужно так: \"!{1} [ссылка] [проекты_через_запятую]\"", msg.Sender.FullName, commandArguments[0]));
+                        SkypeSingleton.Instance.sendChatMessage(msg.ChatName, string.Format("{0}, ошибка в синтаксисе. Нужно так: \"!{1} [ссылка] [проекты_через_запятую]\"", msg.Sender.FullName, commandArguments[0]));
                         return;
                     }
 
@@ -544,7 +544,7 @@ namespace La_cryogenie
 
                     if (urltool.host == null)
                     {
-                        SkypeSingleton.Instance.sendMessage(msg.ChatName,
+                        SkypeSingleton.Instance.sendChatMessage(msg.ChatName,
                         string.Format("{0}, что-то не так в ссылке ({1}). Исправь и попробуй ещё раз", msg.Sender.FullName, urltool.original_url));
                         return;
                     }
@@ -552,18 +552,18 @@ namespace La_cryogenie
                     GoldSellerLink gseller = new GoldSellerLink(urltool);
                     if (gseller.alreadyInDb())
                     {
-                        SkypeSingleton.Instance.sendMessage(msg.ChatName, string.Format("Спасибо, {0}! Я обновила статус активности «{1}»", msg.Sender.FullName, urltool.host));
+                        SkypeSingleton.Instance.sendChatMessage(msg.ChatName, string.Format("Спасибо, {0}! Я обновила статус активности «{1}»", msg.Sender.FullName, urltool.host));
                         gseller.updateLink(game_projects);
                     }
                     else
                     {
-                        SkypeSingleton.Instance.sendMessage(msg.ChatName, string.Format("Спасибо, {0}! Ты первый добавил «{1}»", msg.Sender.FullName, urltool.host));
+                        SkypeSingleton.Instance.sendChatMessage(msg.ChatName, string.Format("Спасибо, {0}! Ты первый добавил «{1}»", msg.Sender.FullName, urltool.host));
                         gseller.insertNewLink(msg.Sender.Handle, "NULL", urltool.host, urltool.original_url, game_projects, Utilities.getCurrentUnixTime(), -1);
                     }
                     break;
                 case "площадка":
                 case "platform":
-                    SkypeSingleton.Instance.sendMessage(msg.ChatName, string.Format("Команда «{0}» выпилена за редкостью использования", commandArguments[0]));
+                    SkypeSingleton.Instance.sendChatMessage(msg.ChatName, string.Format("Команда «{0}» выпилена за редкостью использования", commandArguments[0]));
                     break;
                 case "info":
                 case "инфо":
@@ -571,7 +571,7 @@ namespace La_cryogenie
                 case "i":
                     if (commandArguments.Length < 2)
                     {
-                        SkypeSingleton.Instance.sendMessage(msg.ChatName, string.Format("Неправильный формат команды. Наберите !{0} URL", commandArguments[0]));
+                        SkypeSingleton.Instance.sendChatMessage(msg.ChatName, string.Format("Неправильный формат команды. Наберите !{0} URL", commandArguments[0]));
                         break;
                     }
 
@@ -579,7 +579,7 @@ namespace La_cryogenie
                     DomainTools dt2 = new DomainTools(urltool.host);
                     if (!dt2.hasXml)
                     {
-                        SkypeSingleton.Instance.sendMessage(msg.ChatName, "[DomainTools.com] Не удалось получить никакой информации.");
+                        SkypeSingleton.Instance.sendChatMessage(msg.ChatName, "[DomainTools.com] Не удалось получить никакой информации.");
                         return;
                     }
                     break;
@@ -603,25 +603,25 @@ namespace La_cryogenie
                 case "add":
                     //Notices newNotice = new Notices(msg, commandArguments);
                     //newNotice.addNewNotice();
-                    SkypeSingleton.Instance.sendMessage(msg.ChatName, string.Format("Команда «{0}» временно выключена", commandArguments[0]));
+                    SkypeSingleton.Instance.sendChatMessage(msg.ChatName, string.Format("Команда «{0}» временно выключена", commandArguments[0]));
                     break;
                 case "список":
                 case "list":
                     //Notices listOfNotices = new Notices(msg);
                     //listOfNotices.postListOfNotices();
-                    SkypeSingleton.Instance.sendMessage(msg.ChatName, string.Format("Команда «{0}» временно выключена", commandArguments[0]));
+                    SkypeSingleton.Instance.sendChatMessage(msg.ChatName, string.Format("Команда «{0}» временно выключена", commandArguments[0]));
                     break;
                 case "удалить":
                 case "delete":
                     //Notices deleteNotice = new Notices(msg, commandArguments);
                     //deleteNotice.deleteNotice();
-                    SkypeSingleton.Instance.sendMessage(msg.ChatName, string.Format("Команда «{0}» временно выключена", commandArguments[0]));
+                    SkypeSingleton.Instance.sendChatMessage(msg.ChatName, string.Format("Команда «{0}» временно выключена", commandArguments[0]));
                     break;
                 case "применить":
                 case "apply":
                     //Notices applyNotices = new Notices();
                     //applyNotices.refreshListOfActiveNotices();
-                    SkypeSingleton.Instance.sendMessage(msg.ChatName, string.Format("Команда «{0}» временно выключена", commandArguments[0]));
+                    SkypeSingleton.Instance.sendChatMessage(msg.ChatName, string.Format("Команда «{0}» временно выключена", commandArguments[0]));
                     break;
                 default:
                     break;
@@ -677,6 +677,7 @@ namespace La_cryogenie
                             SelfTestSingleton.Instance.Start();
                             NoticesSingleton.Instance.startChecking();
                             NoOwnerSingleton.Instance.timerNoOwner_Start();
+                            UnreportedPhishingReminder.timer_Start();
                             break;
                         default:
                             break;
@@ -723,7 +724,7 @@ namespace La_cryogenie
                     }
                     break;
                 default:
-                    SkypeSingleton.Instance.sendMessage(Chats.botCommandChat, string.Format("Нет команды «{0}»", commandArguments[0]));
+                    SkypeSingleton.Instance.sendChatMessage(Chats.botCommandChat, string.Format("Нет команды «{0}»", commandArguments[0]));
                     break;
             }
         }
@@ -732,7 +733,7 @@ namespace La_cryogenie
         #region private messages handling // under construction
         private void handlePrivateMessage()
         {
-            SkypeSingleton.Instance.sendMessage(msg.ChatName, "Я ещё не обучена отвечать на приватные сообщения.");
+            SkypeSingleton.Instance.sendChatMessage(msg.ChatName, "Я ещё не обучена отвечать на приватные сообщения.");
         }
 
         #endregion

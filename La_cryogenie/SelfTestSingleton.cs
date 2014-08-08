@@ -29,7 +29,7 @@ namespace La_cryogenie
                 selfTest_Timer.Tick += SelfTestTimer_Tick;
                 selfTest_Timer.Start();
 
-                SkypeSingleton.Instance.sendMessage(Chats.botCommandChat, "[+] Включен таймер селфтеста");
+                SkypeSingleton.Instance.sendChatMessage(Chats.botCommandChat, "[+] Включен таймер селфтеста");
             }
         }
 
@@ -39,7 +39,7 @@ namespace La_cryogenie
             {
                 selfTest_Timer.Stop();
                 selfTest_Timer.Tick -= SelfTestTimer_Tick;
-                SkypeSingleton.Instance.sendMessage(Chats.botCommandChat, "[-] Выключен таймер селфтеста");                
+                SkypeSingleton.Instance.sendChatMessage(Chats.botCommandChat, "[-] Выключен таймер селфтеста");                
             }
 
         }
@@ -49,7 +49,7 @@ namespace La_cryogenie
             DateTime currentTime = DateTime.Now;
             TimeSpan uptime = currentTime - botStartTime;
             string result = string.Format("[Selftest] Аптайм: {0} дней {1} часов {2} минут {3} секунд.", uptime.Days.ToString(), uptime.Hours.ToString(), uptime.Minutes.ToString(), uptime.Seconds.ToString());
-            SkypeSingleton.Instance.sendMessage(Chats.SelfTest, result);
+            SkypeSingleton.Instance.sendChatMessage(Chats.SelfTest, result);
         }
 
         #endregion singleton

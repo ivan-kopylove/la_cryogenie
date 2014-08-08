@@ -30,7 +30,7 @@ namespace La_cryogenie
                 noticesChecker.Tick += noticesChecker_Tick;
                 noticesChecker.Start();
 
-                SkypeSingleton.Instance.sendMessage(Chats.botCommandChat, "[+] Включен таймер проверки нотайсов");
+                SkypeSingleton.Instance.sendChatMessage(Chats.botCommandChat, "[+] Включен таймер проверки нотайсов");
             }
         }
         public void StopChecking()
@@ -39,7 +39,7 @@ namespace La_cryogenie
             {
                 noticesChecker.Stop();
                 noticesChecker.Tick -= noticesChecker_Tick;
-                SkypeSingleton.Instance.sendMessage(Chats.botCommandChat, "[-] Выключен таймер проверки нотайсов");
+                SkypeSingleton.Instance.sendChatMessage(Chats.botCommandChat, "[-] Выключен таймер проверки нотайсов");
             }
             
         }
@@ -131,7 +131,7 @@ namespace La_cryogenie
                                 string chatToPost = notice.Field<string>("chat_to_post");
                                 string text = notice.Field<string>("text");
 
-                                SkypeSingleton.Instance.sendMessage(chatToPost, text);
+                                SkypeSingleton.Instance.sendChatMessage(chatToPost, text);
                                 decrementRunTimes(rowid);
                             }
                         }

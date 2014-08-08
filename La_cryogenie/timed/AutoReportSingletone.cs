@@ -36,7 +36,7 @@ namespace La_cryogenie
                 timer.Interval = new TimeSpan(0, 2, 30);
                 timer.Start();
 
-                SkypeSingleton.Instance.sendMessage(Chats.botCommandChat, "[+] Включен таймер мониторинга файлов из бедчата");
+                SkypeSingleton.Instance.sendChatMessage(Chats.botCommandChat, "[+] Включен таймер мониторинга файлов из бедчата");
             }
         }
 
@@ -47,7 +47,7 @@ namespace La_cryogenie
                 timer.Stop();
                 timer.Tick -= timerTick;
 
-                SkypeSingleton.Instance.sendMessage(Chats.botCommandChat, "[+] Выключен таймер мониторинга файлов из бедчата");
+                SkypeSingleton.Instance.sendChatMessage(Chats.botCommandChat, "[+] Выключен таймер мониторинга файлов из бедчата");
             }
         }
 
@@ -105,7 +105,7 @@ namespace La_cryogenie
                     post += string.Format("[{0}] {1}\n", "WF", wf_link);
                 }
 
-                SkypeSingleton.Instance.sendMessage(Chats.botBustersChat, post);
+                SkypeSingleton.Instance.sendChatMessage(Chats.botBustersChat, post);
             }
 
             
@@ -122,13 +122,13 @@ namespace La_cryogenie
                 //уже в базе
                 if (ph.IsReported)
                 {
-                    SkypeSingleton.Instance.sendMessage(Chats.AutoReports,
+                    SkypeSingleton.Instance.sendChatMessage(Chats.AutoReports,
                     string.Format("[Авторепорт] «{0}» уже сдан мне. Последний раз отправляли хостеру {1}",
                     urtool.host, ph.LastReportToHoster.ToString()));
                 }
                 else
                 {
-                    SkypeSingleton.Instance.sendMessage(Chats.AutoReports,
+                    SkypeSingleton.Instance.sendChatMessage(Chats.AutoReports,
                     string.Format("[Авторепорт] «{0}» уже сдан мне, однако, хостеру его ещё не отправляли.",
                     urtool.host));
                 }
@@ -146,7 +146,7 @@ namespace La_cryogenie
                         CyberMailer cMailer = new CyberMailer(hst.AbuseEmail, predef.getBody(), predef.getSubject());
                         cMailer.sendEmail();
 
-                        SkypeSingleton.Instance.sendMessage(Chats.AutoReports,
+                        SkypeSingleton.Instance.sendChatMessage(Chats.AutoReports,
                         string.Format("[Авторепорт] Я отправила письмо хостеру «{0}» ( {1} ) на {2} с жалобой на «{3}»",
                         hst.Name, hst.HomePage, hst.AbuseEmail, urtool.host));
                         ph.insertNewLink(SkypeSingleton.Instance.skype.CurrentUserHandle, SkypeSingleton.Instance.skype.CurrentUserHandle, urtool.host, urtool.original_url, project, Utilities.getCurrentUnixTime(), Utilities.getCurrentUnixTime());
@@ -154,7 +154,7 @@ namespace La_cryogenie
                     }
                     else
                     {
-                        SkypeSingleton.Instance.sendMessage(Chats.AutoReports,
+                        SkypeSingleton.Instance.sendChatMessage(Chats.AutoReports,
                         string.Format("[Авторепорт] «{0}» принадлежит хостеру «{1}» ( {2} ). Для него не прописана почта, но есть страница обратной связи: {3} ",
                         urtool.host, hst.Name, hst.HomePage, hst.AbusePage));
                         ph.insertNewLink(SkypeSingleton.Instance.skype.CurrentUserHandle, "NULL", urtool.host, urtool.original_url, project, Utilities.getCurrentUnixTime(), 0);
@@ -163,7 +163,7 @@ namespace La_cryogenie
                 }
                 else
                 {
-                    SkypeSingleton.Instance.sendMessage(Chats.AutoReports,
+                    SkypeSingleton.Instance.sendChatMessage(Chats.AutoReports,
                     string.Format("[Авторепорт] Записей о домене второго уровня «{0}» в базе бесплатных хостингов не найдено. «{1}» помечен как неотправленный.",
                     urtool.secondLevelDomain, urtool.host));
                     ph.insertNewLink(SkypeSingleton.Instance.skype.CurrentUserHandle, "NULL", urtool.host, urtool.original_url, project, Utilities.getCurrentUnixTime(), 0);

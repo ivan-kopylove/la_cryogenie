@@ -15,7 +15,7 @@ namespace La_cryogenie
 
         private void markAllAsReported()
         {
-            SkypeSingleton.Instance.sendMessage(msg.ChatName, string.Format("Спасибо, {0}! Все мошеннические страницы отмечены как отправленные хостерам", msg.Sender.FullName));
+            SkypeSingleton.Instance.sendChatMessage(msg.ChatName, string.Format("Спасибо, {0}! Все мошеннические страницы отмечены как отправленные хостерам", msg.Sender.FullName));
             long nowTime = Utilities.getCurrentUnixTime();
             Sqlite.executeVoid(string.Format("UPDATE [links] SET last_report_to_hoster = '{0}', reporter_to_hoster = '{1}' WHERE last_report_to_hoster = 0 AND (category = 'phishing_page' OR category = 'malware');", nowTime, msg.Sender.Handle));
         }
@@ -30,7 +30,7 @@ namespace La_cryogenie
 
             if (commandArguments.Length > 2)
             {
-                SkypeSingleton.Instance.sendMessage(msg.ChatName, string.Format("Команда «{0}» теперь принимает только 1 аргумент: «все» или «all» («!{0} все»). Используй «!фишинг» или «!файл» для сдачи сайтов", commandArguments[0]));
+                SkypeSingleton.Instance.sendChatMessage(msg.ChatName, string.Format("Команда «{0}» теперь принимает только 1 аргумент: «все» или «all» («!{0} все»). Используй «!фишинг» или «!файл» для сдачи сайтов", commandArguments[0]));
             }
         }
     }

@@ -31,7 +31,7 @@ namespace La_cryogenie
                 timerNoOwner.Interval = new TimeSpan(0, 0, 30);
                 timerNoOwner.Start();
 
-                SkypeSingleton.Instance.sendMessage(Chats.botCommandChat, "[+] Включен таймер проверки no_owner");
+                SkypeSingleton.Instance.sendChatMessage(Chats.botCommandChat, "[+] Включен таймер проверки no_owner");
             }
         }
 
@@ -41,7 +41,7 @@ namespace La_cryogenie
             {
                 timerNoOwner.Stop();
                 timerNoOwner.Tick -= timerNoOwner_Tick;
-                SkypeSingleton.Instance.sendMessage(Chats.botCommandChat, "[-] Выключен таймер проверки no_owner");
+                SkypeSingleton.Instance.sendChatMessage(Chats.botCommandChat, "[-] Выключен таймер проверки no_owner");
             }
         }
 
@@ -114,7 +114,7 @@ namespace La_cryogenie
                             }
                         }
                         messageToPost = "[no_owner] " + messageToPost;
-                        SkypeSingleton.Instance.sendMessage(failChat, messageToPost);
+                        SkypeSingleton.Instance.sendChatMessage(failChat, messageToPost);
                     }
                     pop.DeleteMessage(1);
                 }

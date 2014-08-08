@@ -51,7 +51,7 @@ namespace La_cryogenie
             if (!isMessageReceivingEnabled)
             {
                 isMessageReceivingEnabled = true;
-                sendMessage(Chats.botCommandChat, "[+] Включен глобальный прием сообщений");
+                sendChatMessage(Chats.botCommandChat, "[+] Включен глобальный прием сообщений");
             }
         }
 
@@ -60,7 +60,7 @@ namespace La_cryogenie
             if (isMessageReceivingEnabled)
             {
                 isMessageReceivingEnabled = false;
-                sendMessage(Chats.botCommandChat, "[-] Выключен глобальный прием сообщений");
+                sendChatMessage(Chats.botCommandChat, "[-] Выключен глобальный прием сообщений");
             }
         }
         /*
@@ -113,9 +113,14 @@ namespace La_cryogenie
             }
         }
 
-        public void sendMessage(string chat, string message)
+        public void sendChatMessage(string chat, string message)
         {
             this.skype.Chat[chat].SendMessage(message);
+        }
+
+        public void sendPrivateMessageBySkypeLogin(string username, string message)
+        {
+            this.skype.SendMessage(username, message);
         }
     }
 }

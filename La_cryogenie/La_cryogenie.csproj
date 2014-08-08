@@ -146,6 +146,7 @@
     <Compile Include="SelfTestSingleton.cs" />
     <Compile Include="Sqlite.cs" />
     <Compile Include="NoOwnerSingleton.cs" />
+    <Compile Include="timed\UnreportedPhishingReminder.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="WindowsHandler.cs" />
     <Page Include="MainWindow.xaml">
