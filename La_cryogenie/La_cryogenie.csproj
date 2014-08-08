@@ -224,7 +224,7 @@
     <Resource Include="1393642942_23178.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\!MyLibs\FishLib\FishLib\FishLib.csproj">
+    <ProjectReference Include="..\..\..\!libs\FishLib\FishLib\FishLib.csproj">
       <Project>{6e50af24-b58c-4693-b9f8-ee7f797a8690}</Project>
       <Name>FishLib</Name>
     </ProjectReference>

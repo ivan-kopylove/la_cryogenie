@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "La_cryogenie", "La_cryogenie\La_cryogenie.csproj", "{8F7AAB60-F930-4C5B-8F89-F9031683F424}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FishLib", "..\!MyLibs\FishLib\FishLib\FishLib.csproj", "{6E50AF24-B58C-4693-B9F8-EE7F797A8690}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FishLib", "..\..\!libs\FishLib\FishLib\FishLib.csproj", "{6E50AF24-B58C-4693-B9F8-EE7F797A8690}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

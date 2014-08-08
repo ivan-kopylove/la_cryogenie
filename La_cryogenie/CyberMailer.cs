@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
@@ -7,8 +8,8 @@ namespace La_cryogenie
 {
     class CyberMailer
     {
-        string myAddress = @"investigations@corp.mail.ru";
-        string myPassword = @"p3boRKfOvK7J";
+        string myAddress = File.ReadAllLines(@"X:\db\passwords.txt")[3];
+        string myPassword = File.ReadAllLines(@"X:\db\passwords.txt")[4];
         string smtpServer = @"smtp.mail.ru";
 
         string abuseEmail;
