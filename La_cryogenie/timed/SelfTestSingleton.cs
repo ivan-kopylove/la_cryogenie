@@ -25,7 +25,7 @@ namespace La_cryogenie
         {
             if (!selfTest_Timer.IsEnabled)
             {
-                selfTest_Timer.Interval = new TimeSpan(0, 5, 0);
+                selfTest_Timer.Interval = new TimeSpan(0, 60, 0);
                 selfTest_Timer.Tick += SelfTestTimer_Tick;
                 selfTest_Timer.Start();
 

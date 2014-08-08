@@ -12,7 +12,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Menu x:Name="menu_Main"  Margin="0,0,0,264.245" Grid.RowSpan="3">
+        <Menu x:Name="menu_Main" Grid.RowSpan="3">
             <MenuItem Header="File">
                 <MenuItem x:Name="menuitem_File_Exit" Header="Exit" Click="menuitem_File_Exit_Click"/>
             </MenuItem>
@@ -20,10 +20,9 @@
                 <MenuItem x:Name="menuitem_Skype_Attach" Header="Попытаться прикрепиться" Click="menuitem_Skype_Attach_Click"/>
             </MenuItem>
         </Menu>
-        <StackPanel Grid.Row="1">
-        <TextBox x:Name="textBox_log" Grid.Row="1" MaxHeight="200" MaxWidth="800" Margin="5" VerticalScrollBarVisibility="Auto">Внутренний лог</TextBox>
-        <TextBox x:Name="textBox_skypeCommandsLog" Grid.Row="1" MaxHeight="200" MaxWidth="800" Margin="5" VerticalScrollBarVisibility="Auto">Лог команд из скайпа</TextBox>
-        <TextBox x:Name="textBox_badChatUpdateLog" Grid.Row="1" MaxHeight="200" MaxWidth="800" Margin="5" VerticalScrollBarVisibility="Auto">Лог проверки бедчат</TextBox>
+        <StackPanel Grid.Row="3">
+        <TextBox x:Name="textBox_log" TextWrapping="Wrap" Grid.Row="1" MaxHeight="200" Margin="5" VerticalScrollBarVisibility="Auto">Внутренний лог</TextBox>
+            <TextBox x:Name="textBox_skypeCommandsLog" TextWrapping="Wrap" Grid.Row="1" MaxHeight="200" Margin="5" VerticalScrollBarVisibility="Auto">Лог команд из скайпа</TextBox>
         </StackPanel>
         <DockPanel Grid.Row="3" VerticalAlignment="Bottom">
             <StatusBar>
@@ -52,7 +51,7 @@
                     <TextBlock x:Name="textblock_StatusBar2">Set</TextBlock>
                 </StatusBarItem>
                 <StatusBarItem Grid.Column="3">
-                    <TextBlock>Go!</TextBlock>
+                    <TextBlock>Text</TextBlock>
                 </StatusBarItem>
             </StatusBar>
         </DockPanel>

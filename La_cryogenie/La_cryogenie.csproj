@@ -141,11 +141,11 @@
     <Compile Include="timed\AutoReportSingletone.cs" />
     <Compile Include="Hoster.cs" />
     <Compile Include="InitializeApp.cs" />
-    <Compile Include="NoticesSingleton.cs" />
+    <Compile Include="timed\NoticesSingleton.cs" />
     <Compile Include="PredefGenerator.cs" />
-    <Compile Include="SelfTestSingleton.cs" />
+    <Compile Include="timed\SelfTestSingleton.cs" />
     <Compile Include="Sqlite.cs" />
-    <Compile Include="NoOwnerSingleton.cs" />
+    <Compile Include="timed\NoOwnerSingleton.cs" />
     <Compile Include="timed\UnreportedPhishingReminder.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="WindowsHandler.cs" />

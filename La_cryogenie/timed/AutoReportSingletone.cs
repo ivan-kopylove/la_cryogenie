@@ -135,20 +135,18 @@ namespace La_cryogenie
             }
             else
             {
-                Hoster hst = new Hoster(urtool);
-                if (hst.hasRecord())
+                Hoster hoster = new Hoster(urtool);
+                if (hoster.HasDbRecord)
                 {
-
-
-                    if (hst.hasEmail())
+                    if (hoster.HasEmail)
                     {
-                        PredefGenerator predef = new PredefGenerator(hst.Name, hst.Country, hst.Type, urtool.host);
-                        CyberMailer cMailer = new CyberMailer(hst.AbuseEmail, predef.getBody(), predef.getSubject());
+                        PredefGenerator predef = new PredefGenerator(hoster.Name, hoster.Country, hoster.Type, urtool.host);
+                        CyberMailer cMailer = new CyberMailer(hoster.AbuseEmail, predef.getBody(), predef.getSubject());
                         cMailer.sendEmail();
 
                         SkypeSingleton.Instance.sendChatMessage(Chats.AutoReports,
                         string.Format("[Авторепорт] Я отправила письмо хостеру «{0}» ( {1} ) на {2} с жалобой на «{3}»",
-                        hst.Name, hst.HomePage, hst.AbuseEmail, urtool.host));
+                        hoster.Name, hoster.HomePage, hoster.AbuseEmail, urtool.host));
                         ph.insertNewLink(SkypeSingleton.Instance.skype.CurrentUserHandle, SkypeSingleton.Instance.skype.CurrentUserHandle, urtool.host, urtool.original_url, project, Utilities.getCurrentUnixTime(), Utilities.getCurrentUnixTime());
                         return;
                     }
@@ -156,7 +154,7 @@ namespace La_cryogenie
                     {
                         SkypeSingleton.Instance.sendChatMessage(Chats.AutoReports,
                         string.Format("[Авторепорт] «{0}» принадлежит хостеру «{1}» ( {2} ). Для него не прописана почта, но есть страница обратной связи: {3} ",
-                        urtool.host, hst.Name, hst.HomePage, hst.AbusePage));
+                        urtool.host, hoster.Name, hoster.HomePage, hoster.AbusePage));
                         ph.insertNewLink(SkypeSingleton.Instance.skype.CurrentUserHandle, "NULL", urtool.host, urtool.original_url, project, Utilities.getCurrentUnixTime(), 0);
                         return;
                     }

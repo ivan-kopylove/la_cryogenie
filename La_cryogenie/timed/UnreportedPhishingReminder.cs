@@ -8,6 +8,7 @@ using System.Windows.Threading;
 
 namespace La_cryogenie
 {
+    //whole class - spike
     static class UnreportedPhishingReminder
     {
         #region timer

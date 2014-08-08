@@ -38,56 +38,71 @@ namespace La_cryogenie
             dnsRecord));
         }
 
-        public bool hasRecord()
+        public bool HasDbRecord
         {
-            //spike            
-            if (uri != null)
+            get
             {
-                switch (uri.firstleveldomain)
+                //spike            
+                if (uri != null)
                 {
-                    case "tk":
-                    case "ml":
-                    case "cf":
-                    case "ga":
-                        this.Name = "freenom.com";
-                        this.AbuseEmail = "abuse@freenom.com";
-                        this.Country = "en";
-                        this.AbusePage = "-";
-                        this.HomePage = "http://freenom.com";
-                        this.Type = "page";
-                        return true;
-                    default:
-                        break;
+                    switch (uri.firstleveldomain)
+                    {
+                        case "tk":
+                        case "ml":
+                        case "cf":
+                        case "ga":
+                            this.Name = "freenom.com";
+                            this.AbuseEmail = "abuse@freenom.com";
+                            this.Country = "en";
+                            this.AbusePage = "-";
+                            this.HomePage = "http://freenom.com";
+                            this.Type = "page";
+                            return true;
+                        default:
+                            break;
+                    }
+
                 }
 
-            }
 
-            if (HostersTable.Rows.Count == 0)
-            {
-                return false;
-            }
-            else
-            {
-                this.Name = HostersTable.Rows[0].Field<string>("hoster");
-                this.AbuseEmail = HostersTable.Rows[0].Field<string>("abuseemail");
-                this.Country = HostersTable.Rows[0].Field<string>("country");
-                this.AbusePage = HostersTable.Rows[0].Field<string>("abusepage");
-                this.HomePage = HostersTable.Rows[0].Field<string>("homepage");
-                this.Type = HostersTable.Rows[0].Field<string>("type");
+                if (HostersTable.Rows.Count == 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    this.Name = HostersTable.Rows[0].Field<string>("hoster");
+                    this.AbuseEmail = HostersTable.Rows[0].Field<string>("abuseemail");
+                    this.Country = HostersTable.Rows[0].Field<string>("country");
+                    this.AbusePage = HostersTable.Rows[0].Field<string>("abusepage");
+                    this.HomePage = HostersTable.Rows[0].Field<string>("homepage");
+                    this.Type = HostersTable.Rows[0].Field<string>("type");
 
-                return true;
+                    return true;
+                }
+            }
+            set
+            {
+                ;
             }
         }
 
-        public bool hasEmail()
+        public bool HasEmail
         {
-            if (AbuseEmail.Contains("@"))
+            get
             {
-                return true;
+                if (AbuseEmail.Contains("@"))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
+            set
             {
-                return false;
+                ;
             }
         }
     }

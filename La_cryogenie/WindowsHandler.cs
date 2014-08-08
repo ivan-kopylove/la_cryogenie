@@ -44,10 +44,5 @@ namespace La_cryogenie
             MainWindow.textblock_StatusBar2.Text = text;
         }
 
-        public static void textBox_badChatUpdateLog(string log)
-        {
-            MainWindow.textBox_badChatUpdateLog.Text =
-                log + Environment.NewLine + MainWindow.textBox_badChatUpdateLog.Text;
-        }
     }
 }

@@ -113,7 +113,7 @@ namespace La_cryogenie
 
         }
 
-        public bool hasXml
+        public bool HasXml
         {
             get
             {

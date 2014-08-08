@@ -316,11 +316,11 @@ namespace La_cryogenie
                     else
                     {
                         Hoster freeHoster = new Hoster(urltool);
-                        if (freeHoster.hasRecord())
+                        if (freeHoster.HasDbRecord)
                         {
 
 
-                            if (freeHoster.hasEmail())
+                            if (freeHoster.HasDbRecord)
                             {
                                 PredefGenerator predef = new PredefGenerator(freeHoster.Name, freeHoster.Country, freeHoster.Type, urltool.host);
                                 CyberMailer cMailer = new CyberMailer(freeHoster.AbuseEmail, predef.getBody(), predef.getSubject());
@@ -353,7 +353,7 @@ namespace La_cryogenie
 
 
                             DomainTools dt = new DomainTools(urltool.host);
-                            if (!dt.hasXml)
+                            if (!dt.HasXml)
                             {
                                 SkypeSingleton.Instance.sendChatMessage(msg.ChatName,
                                 string.Format("«{0}» помечен как неотправленный **", urltool.host));
@@ -367,9 +367,9 @@ namespace La_cryogenie
                                     foreach (string ns in dt.nServers)
                                     {
                                         Hoster paidHoster = new Hoster(ns);
-                                        if (paidHoster.hasRecord())
+                                        if (paidHoster.HasDbRecord)
                                         {
-                                            if (paidHoster.hasEmail())
+                                            if (paidHoster.HasDbRecord)
                                             {
                                                 PredefGenerator predef = new PredefGenerator(paidHoster.Name, paidHoster.Country, paidHoster.Type, urltool.host);
                                                 CyberMailer cMailer = new CyberMailer(paidHoster.AbuseEmail, predef.getBody(), predef.getSubject());
@@ -398,7 +398,6 @@ namespace La_cryogenie
                                 string.Format("«{0}» помечен как неотправленный ***", urltool.host));
                                 ph.insertNewLink(msg.Sender.Handle, "NULL", urltool.host, urltool.original_url, game_projects, Utilities.getCurrentUnixTime(), 0);
                             }
-
 
                             return;
                         }
@@ -451,9 +450,9 @@ namespace La_cryogenie
                     else
                     {
                         Hoster freeHoster = new Hoster(urltool);
-                        if (freeHoster.hasRecord())
+                        if (freeHoster.HasDbRecord)
                         {
-                            if (freeHoster.hasEmail())
+                            if (freeHoster.HasDbRecord)
                             {
                                 PredefGenerator predef = new PredefGenerator(freeHoster.Name, freeHoster.Country, freeHoster.Type, urltool.original_url);
                                 CyberMailer cMailer = new CyberMailer(freeHoster.AbuseEmail, predef.getBody(), predef.getSubject());
@@ -577,7 +576,7 @@ namespace La_cryogenie
 
                     urltool = new URLTools(commandArguments[1]);
                     DomainTools dt2 = new DomainTools(urltool.host);
-                    if (!dt2.hasXml)
+                    if (!dt2.HasXml)
                     {
                         SkypeSingleton.Instance.sendChatMessage(msg.ChatName, "[DomainTools.com] Не удалось получить никакой информации.");
                         return;
