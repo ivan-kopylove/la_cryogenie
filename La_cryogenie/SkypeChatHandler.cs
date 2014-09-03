@@ -1,10 +1,12 @@
 ﻿using FishLib;
 using SKYPE4COMLib;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Documents;
 
 namespace La_cryogenie
 {
@@ -243,6 +245,11 @@ namespace La_cryogenie
                 case "тест":
                     SkypeSingleton.Instance.sendChatMessage(msg.ChatName, string.Format("{0}", commandArguments[0]));
                     break;
+                case "ктомолодец":
+                case "whogood":
+                    Goodboys goodboys = new Goodboys(msg, commandArguments);
+                    goodboys.run();
+                    break;
                 case "стат":
                 case "stat":
                     Stat stat = new Stat(msg, commandArguments);
@@ -265,13 +272,13 @@ namespace La_cryogenie
                 case "ph":
                 case "фишинг":
                 case "phishing":
-                case "заебали":
-                case "хуишинг":
                     if (isCommandLengthError(commandArguments, 3))
                     {
                         SkypeSingleton.Instance.sendChatMessage(msg.ChatName, string.Format("{0}, ошибка в синтаксисе. Нужно так: \"!{1} [ссылка] проекты_через_запятую\"", msg.Sender.FullName, commandArguments[0]));
                         return;
                     }
+
+
 
                     game_projects = getGameProjects(commandArguments);
                     if (!isGameProjectsValid(game_projects))
@@ -280,6 +287,19 @@ namespace La_cryogenie
                     }
 
                     urltool = new URLTools(commandArguments[1]);
+
+
+                    string[] _file_hosters = File.ReadAllLines(@"X:\db\La_cryogenie\file_hosters.txt");
+                    List<string> file_hosters = new List<string>(_file_hosters);
+
+                    if (file_hosters.Contains(urltool.host))
+                    {
+                        SkypeSingleton.Instance.sendChatMessage(msg.ChatName,
+                        string.Format("{0}, команда «{1}» не предназначена для файловых хостингов. Попробуй другую команду.", msg.Sender.FullName, commandArguments[0]));
+                        return;
+                    }
+
+
 
                     if (urltool.host == null)
                     {
@@ -294,14 +314,14 @@ namespace La_cryogenie
                         if (ph.IsReported)
                         {
                             SkypeSingleton.Instance.sendChatMessage(msg.ChatName,
-                            string.Format("{0}, «{1}» уже сдан мне. Последний раз отправляли хостеру {2}",
+                            string.Format("{0}, я уже знаю об «{1}». Последний раз отправляли хостеру {2}",
                             msg.Sender.FullName, urltool.host, ph.LastReportToHoster.ToString()));
 
                             TimeSpan ts = new TimeSpan(2, 0, 0, 0);
                             if (DateTime.Now - ph.LastReportToHoster > ts)
                             {
                                 SkypeSingleton.Instance.sendChatMessage(msg.ChatName,
-                                string.Format("По всей видимости, за {0} дня ресурс не забыл закрыт. «{1}» помечен как неотправленный",
+                                string.Format("За {0} дня «{1}» не был закрыт. «{1}» помечен к повторной отправке жалобы.",
                                 ts.Days, urltool.host));
                                 ph.markUnSent(urltool.host);
                             }
@@ -309,7 +329,7 @@ namespace La_cryogenie
                         else
                         {
                             SkypeSingleton.Instance.sendChatMessage(msg.ChatName,
-                            string.Format("{0}, «{1}» уже сдан мне, однако, хостеру его ещё не отправляли.",
+                            string.Format("{0}, я уже знаю об «{1}», однако, хостеру жалобу на него ещё не отправляли.",
                             msg.Sender.FullName, urltool.host));
                         }
                     }
@@ -320,21 +340,21 @@ namespace La_cryogenie
                         {
 
 
-                            if (freeHoster.HasDbRecord)
+                            if (freeHoster.HasEmail)
                             {
                                 PredefGenerator predef = new PredefGenerator(freeHoster.Name, freeHoster.Country, freeHoster.Type, urltool.host);
                                 CyberMailer cMailer = new CyberMailer(freeHoster.AbuseEmail, predef.getBody(), predef.getSubject());
                                 cMailer.sendEmail();
 
                                 SkypeSingleton.Instance.sendChatMessage(msg.ChatName,
-                                string.Format("Спасибо, {0}! Я отправила письмо хостеру «{1}» ( {2} ) на {3} с жалобой на «{4}»", msg.Sender.FullName, freeHoster.Name, freeHoster.HomePage, freeHoster.AbuseEmail, urltool.host));
+                                string.Format("Спасибоньки, {0}! Я отправила письмо хостеру «{1}» ( {2} ) на {3} с жалобой на «{4}»", msg.Sender.FullName, freeHoster.Name, freeHoster.HomePage, freeHoster.AbuseEmail, urltool.host));
                                 ph.insertNewLink(msg.Sender.Handle, SkypeSingleton.Instance.skype.CurrentUserHandle, urltool.host, urltool.original_url, game_projects, Utilities.getCurrentUnixTime(), Utilities.getCurrentUnixTime());
                                 return;
                             }
                             else
                             {
                                 SkypeSingleton.Instance.sendChatMessage(msg.ChatName,
-                                string.Format("Спасибо, {0}! «{1}» принадлежит хостеру «{2}» ( {3} ). Для него не прописана почта, но есть страница обратной связи: {4} ",
+                                string.Format("Спасибоньки, {0}! «{1}» принадлежит хостеру «{2}» ( {3} ). Для него не прописана почта, но есть страница обратной связи: {4} ",
                                 msg.Sender.FullName, urltool.host, freeHoster.Name, freeHoster.HomePage, freeHoster.AbusePage));
                                 ph.insertNewLink(msg.Sender.Handle, "NULL", urltool.host, urltool.original_url, game_projects, Utilities.getCurrentUnixTime(), 0);
                                 return;
@@ -369,14 +389,14 @@ namespace La_cryogenie
                                         Hoster paidHoster = new Hoster(ns);
                                         if (paidHoster.HasDbRecord)
                                         {
-                                            if (paidHoster.HasDbRecord)
+                                            if (paidHoster.HasEmail)
                                             {
                                                 PredefGenerator predef = new PredefGenerator(paidHoster.Name, paidHoster.Country, paidHoster.Type, urltool.host);
                                                 CyberMailer cMailer = new CyberMailer(paidHoster.AbuseEmail, predef.getBody(), predef.getSubject());
                                                 cMailer.sendEmail();
 
                                                 SkypeSingleton.Instance.sendChatMessage(msg.ChatName,
-                                                string.Format("Спасибо, {0}! Я отправила письмо хостеру «{1}» ( {2} ) на {3} с жалобой на «{4}»",
+                                                string.Format("Спасибоньки, {0}! Я отправила письмо хостеру «{1}» ( {2} ) на {3} с жалобой на «{4}»",
                                                 msg.Sender.FullName, paidHoster.Name, paidHoster.HomePage, paidHoster.AbuseEmail, urltool.host));
 
                                                 ph.insertNewLink(msg.Sender.Handle, SkypeSingleton.Instance.skype.CurrentUserHandle, urltool.host, urltool.original_url, game_projects, Utilities.getCurrentUnixTime(), Utilities.getCurrentUnixTime());
@@ -385,7 +405,7 @@ namespace La_cryogenie
                                             else
                                             {
                                                 SkypeSingleton.Instance.sendChatMessage(msg.ChatName,
-                                                string.Format("Спасибо, {0}! «{1}» принадлежит хостеру «{2}» ( {3} ). Для него не прописана почта, но есть страница обратной связи: {4} ",
+                                                string.Format("Спасибоньки, {0}! «{1}» принадлежит хостеру «{2}» ( {3} ). Для него не прописана почта, но есть страница обратной связи: {4} ",
                                                 msg.Sender.FullName, urltool.host, paidHoster.Name, paidHoster.HomePage, paidHoster.AbusePage));
                                                 ph.insertNewLink(msg.Sender.Handle, "NULL", urltool.host, urltool.original_url, game_projects, Utilities.getCurrentUnixTime(), 0);
                                                 return;
@@ -437,13 +457,13 @@ namespace La_cryogenie
                         if (mw.reported())
                         {
                             SkypeSingleton.Instance.sendChatMessage(msg.ChatName,
-                            string.Format("{0}, «{1}» уже сдан мне. Последний раз отправляли хостеру {2}",
+                            string.Format("{0}, я уже знаю об «{1}». Последний раз отправляли хостеру {2}",
                             msg.Sender.FullName, urltool.original_url, mw.LastReportToHosterString));
                         }
                         else
                         {
                             SkypeSingleton.Instance.sendChatMessage(msg.ChatName,
-                            string.Format("{0}, «{1}» уже сдан мне, однако, хостеру его ещё не отправляли.",
+                            string.Format("{0}, я уже знаю об «{1}», однако, хостеру его ещё не отправляли.",
                             msg.Sender.FullName, urltool.original_url));
                         }
                     }
@@ -452,7 +472,7 @@ namespace La_cryogenie
                         Hoster freeHoster = new Hoster(urltool);
                         if (freeHoster.HasDbRecord)
                         {
-                            if (freeHoster.HasDbRecord)
+                            if (freeHoster.HasEmail)
                             {
                                 PredefGenerator predef = new PredefGenerator(freeHoster.Name, freeHoster.Country, freeHoster.Type, urltool.original_url);
                                 CyberMailer cMailer = new CyberMailer(freeHoster.AbuseEmail, predef.getBody(), predef.getSubject());
@@ -677,6 +697,7 @@ namespace La_cryogenie
                             NoticesSingleton.Instance.startChecking();
                             NoOwnerSingleton.Instance.timerNoOwner_Start();
                             UnreportedPhishingReminder.timer_Start();
+                            VrnsupportBashMonitorFlagChecker.timer_Start();
                             break;
                         default:
                             break;
@@ -717,6 +738,8 @@ namespace La_cryogenie
                             SelfTestSingleton.Instance.Stop();
                             NoticesSingleton.Instance.StopChecking();
                             NoOwnerSingleton.Instance.timerNoOwner_Stop();
+                            UnreportedPhishingReminder.timer_Stop();
+                            VrnsupportBashMonitorFlagChecker.timer_Stop();
                             break;
                         default:
                             break;
@@ -732,7 +755,11 @@ namespace La_cryogenie
         #region private messages handling // under construction
         private void handlePrivateMessage()
         {
-            SkypeSingleton.Instance.sendChatMessage(msg.ChatName, "Я ещё не обучена отвечать на приватные сообщения.");
+            if (msg.Body.ToLower().Contains("!баш подписаться"))
+            {
+                File.AppendAllText(@"X:\db\VrnsupportBashMonitor\subscribers_list.txt", msg.Sender.Handle + Environment.NewLine);
+                SkypeSingleton.Instance.sendPrivateMessageBySkypeLogin(msg.Sender.Handle, "ок, подписала тебя :-*");
+            }
         }
 
         #endregion

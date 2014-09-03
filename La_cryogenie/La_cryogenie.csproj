@@ -136,6 +136,7 @@
     <Compile Include="commands\Stat.cs" />
     <Compile Include="commands\Ireport.cs" />
     <Compile Include="commands\Unreported.cs" />
+    <Compile Include="commands\Goodboys.cs" />
     <Compile Include="CyberMailer.cs" />
     <Compile Include="DomainTools.cs" />
     <Compile Include="timed\AutoReportSingletone.cs" />
@@ -147,6 +148,7 @@
     <Compile Include="Sqlite.cs" />
     <Compile Include="timed\NoOwnerSingleton.cs" />
     <Compile Include="timed\UnreportedPhishingReminder.cs" />
+    <Compile Include="timed\VrnsupportBashMonitorFlagChecker.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="WindowsHandler.cs" />
     <Page Include="MainWindow.xaml">

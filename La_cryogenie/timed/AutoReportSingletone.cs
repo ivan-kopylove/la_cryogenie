@@ -33,7 +33,7 @@ namespace La_cryogenie
                 firstReport();
 
                 timer.Tick += timerTick;
-                timer.Interval = new TimeSpan(0, 2, 30);
+                timer.Interval = new TimeSpan(0, 1, 0);
                 timer.Start();
 
                 SkypeSingleton.Instance.sendChatMessage(Chats.botCommandChat, "[+] Включен таймер мониторинга файлов из бедчата");
@@ -59,7 +59,7 @@ namespace La_cryogenie
 
         private void firstReport()
         {
-            string finalUrlsPath_ToReport = desktopPath + string.Format(@"\db\BadChatLinkExtractor\URLs_final_ToReport_wf.log");
+            string finalUrlsPath_ToReport = @"X:\db\BadChatLinksExtractor\[WF]_URLs_final_ToReport.log";
 
             string[] wf_links_to_report;
             try
@@ -84,7 +84,7 @@ namespace La_cryogenie
 
 
 
-            string finalUrlsPath_ToCheck = desktopPath + string.Format(@"\db\BadChatLinkExtractor\URLs_final_ToCheck_wf.log");
+            string finalUrlsPath_ToCheck = @"X:\db\BadChatLinksExtractor\[WF]_URLs_final_ToCheck.log";
 
             string[] wf_links_to_check;
 
@@ -123,13 +123,13 @@ namespace La_cryogenie
                 if (ph.IsReported)
                 {
                     SkypeSingleton.Instance.sendChatMessage(Chats.AutoReports,
-                    string.Format("[Авторепорт] «{0}» уже сдан мне. Последний раз отправляли хостеру {1}",
+                    string.Format("[Авторепорт] я уже знаю об «{0}». Последний раз отправляли хостеру {1}",
                     urtool.host, ph.LastReportToHoster.ToString()));
                 }
                 else
                 {
                     SkypeSingleton.Instance.sendChatMessage(Chats.AutoReports,
-                    string.Format("[Авторепорт] «{0}» уже сдан мне, однако, хостеру его ещё не отправляли.",
+                    string.Format("[Авторепорт] я уже знаю об «{0}», однако, хостеру его ещё не отправляли.",
                     urtool.host));
                 }
             }
