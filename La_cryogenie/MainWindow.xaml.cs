@@ -47,7 +47,6 @@ namespace La_cryogenie
                 }
         }
 
-
         private void subscribe_MessageStatusEventHandler()
         {
             if (true)

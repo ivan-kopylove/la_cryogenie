@@ -137,13 +137,13 @@
     <Compile Include="commands\Ireport.cs" />
     <Compile Include="commands\Unreported.cs" />
     <Compile Include="commands\Goodboys.cs" />
-    <Compile Include="CyberMailer.cs" />
-    <Compile Include="DomainTools.cs" />
+    <Compile Include="Antiphishing\CyberMailer.cs" />
+    <Compile Include="Antiphishing\DomainTools.cs" />
     <Compile Include="timed\AutoReportSingletone.cs" />
-    <Compile Include="Hoster.cs" />
+    <Compile Include="Antiphishing\Hoster.cs" />
     <Compile Include="InitializeApp.cs" />
     <Compile Include="timed\NoticesSingleton.cs" />
-    <Compile Include="PredefGenerator.cs" />
+    <Compile Include="Antiphishing\PredefGenerator.cs" />
     <Compile Include="timed\SelfTestSingleton.cs" />
     <Compile Include="Sqlite.cs" />
     <Compile Include="timed\NoOwnerSingleton.cs" />
@@ -159,8 +159,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="SkypeChatHandler.cs" />
-    <Compile Include="SkypeSingleton.cs" />
+    <Compile Include="Skype\SkypeChatHandler.cs" />
+    <Compile Include="Skype\SkypeSingleton.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

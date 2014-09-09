@@ -13,7 +13,6 @@ namespace La_cryogenie
 {
     class AutoReportSingleTon
     {
-        #region singleton
         static AutoReportSingleTon()
         {
             Instance = new AutoReportSingleTon();
@@ -21,7 +20,6 @@ namespace La_cryogenie
         private AutoReportSingleTon() { }
 
         public static AutoReportSingleTon Instance { get; private set; }
-        #endregion
 
         DispatcherTimer timer = new DispatcherTimer();
         private static string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);

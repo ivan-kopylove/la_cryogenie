@@ -17,7 +17,7 @@
                 <MenuItem x:Name="menuitem_File_Exit" Header="Exit" Click="menuitem_File_Exit_Click"/>
             </MenuItem>
             <MenuItem Header="Skype">
-                <MenuItem x:Name="menuitem_Skype_Attach" Header="Попытаться прикрепиться" Click="menuitem_Skype_Attach_Click"/>
+                <MenuItem x:Name="menuitem_Skype_Attach" Header="Попытаться прикрепиться" Click="menuitem_Skype_Attach_Click" IsEnabled="False"/>
             </MenuItem>
         </Menu>
         <StackPanel Grid.Row="3">
